@@ -58,8 +58,8 @@ $Password = $_POST["password"];
 //echo $Password;
 
 $host = 'localhost';//enter hostname
-$SQLuserName = 'horsie';//enter user name of DB
-$Pass = 'horses123!'; //enter password
+$SQLuserName = 'root';//enter user name of DB
+$Pass = 'Rycbar1234!'; //enter password
 $DB = 'equine'; //Enter database name
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
 
