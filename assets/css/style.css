@@ -1,0 +1,78 @@
+body {
+	font-family: Calibri, Arial, sans-serif;
+}
+
+.container {
+	width: 80%;
+	margin: auto;
+}
+
+.note-group {
+	margin-top: 1rem;
+	padding-left: 1rem;
+	border: 1px solid #0033A0;
+	border-radius: 1rem;
+}
+
+.input-form{
+	position: relative;
+	top: 20px;
+	margin-bottom: 1rem;
+}
+
+.input-form-bordered {
+	border: 3px solid #F1F1F1;
+	border-color: #0033A0;
+	border-radius: 1rem;
+	padding: 2rem;
+}
+
+.input-form-collapsed {
+	display: none;
+}
+.equine-imagery {
+	margin-top: 1rem;
+	width: 400px;
+}
+.footer {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	font-size: smaller;
+}
+.footer p {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+/*Text Colors - Primary*/
+.text-wildcat-blue {
+	color: #0033A0;
+}
+.text-wildcat-black{
+	color: #2C2A29;
+}
+
+/*Text Colors - Secondary*/
+.text-light-blue {
+	color: #1897d4;
+}
+.text-medium-blue {
+	color: #143887;
+}
+.text-dark-blue {
+	color: #202C5F;
+}
+.text-light-gray {
+	color: #C8C8C7;
+}
+.text-medium-gray {
+	color: #A5ACAF;
+}
+.text-dark-gray {
+	color: #63656A;
+}
+
+/*Background Colors*/
+.background-wildcat-blue {
+	background-color: #0033A0;
+}
+

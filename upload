@@ -2,4 +2,4 @@
 # copies all necessary files in this directory to the var folder 
 
 sudo cp *.php /var/www/html/ 
-sudo cp *.html /var/www/html/ 
+#sudo cp *.html /var/www/html/ 
