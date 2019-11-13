@@ -11,10 +11,6 @@ $foreleg = $_POST["Foreleg"];
 $hindleg = $_POST["Hindleg"];
 $race = $_POST["Race"];
 
-echo $horse;
-echo $foreleg;
-echo $hindleg;
-echo $race;
 
 $host = 'localhost';//enter hostname
 $SQLuserName = 'root';//enter user name of DB
