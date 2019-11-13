@@ -42,6 +42,8 @@ function login($Username,$Password,$mysqli){
 			echo "</tr>";
 		}
 		echo "</table>";
+		header( "Location: http://172.31.144.101/homepage.php" );
+		exit ;
 	}
 	else
 	{
@@ -56,7 +58,7 @@ $Password = $_POST["password"];
 //echo $newPass;
 //echo $Username;
 //echo $Password;
-
+echo "here";
 $host = 'localhost';//enter hostname
 $SQLuserName = 'root';//enter user name of DB
 $Pass = 'Rycbar1234!'; //enter password
