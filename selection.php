@@ -27,10 +27,10 @@ $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
  }
  else{
 	if($horse == 1){	
-	 	echo "adding horse";
+		echo "adding horse";
 	}
 	else if($horse == 2){
-		 echo "edditing horse";
+		 echo "editing horse";
 
 	}
 	if($foreleg== 1){	
