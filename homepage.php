@@ -57,8 +57,8 @@
 					<option value="2">Edit/View</option>
 				</select>
 			</p>
+			<button type="submit">Submit</button>
 			</fieldset>
-
 		</form>
 		<form action="selection.php" method="post">
 			<fieldset>
@@ -79,7 +79,7 @@
 								<h3 class="alighn">Distal Radius</h3>
 								<p>
 									<label>Distal Radius Dorsomedial</label>
-									<select name="horse">
+									<select name="DistalRadiusDorsomedial">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -90,7 +90,7 @@
 								</p>
 								<p>
 									<label>Distal Radius Dorsolateral</label>
-									<select name="horse">
+									<select name="DistalRadiusDorsolateral">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -100,8 +100,8 @@
 									</select>
 								</p>
 								<p>
-									<label>Distal RadiusPalmar</label>
-									<select name="horse">
+									<label>Distal Radius Palmar</label>
+									<select name="DistalRadiusPalmar">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -117,8 +117,8 @@
 							<div class="show2"id="Radiocarpal Bone">
 								<h3 class="alighn">Radiocarpal Bone</h3>
 								<p>
-									<label>Distal Radius Dorsomedial</label>
-									<select name="horse">
+									<label>Radiocarpal Bone Proximal Medial</label>
+									<select name="RadiocarpalBoneProximalMedial">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -128,8 +128,8 @@
 									</select>
 								</p>
 								<p>
-									<label>Distal Radius Dorsolateral</label>
-									<select name="horse">
+									<label>Radiocarpal Bone Proximal Lateral</label>
+									<select name="RadiocarpalBoneProximalLateral">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -139,8 +139,8 @@
 									</select>
 								</p>
 								<p>
-									<label>Distal Radius Palmar</label>
-									<select name="horse">
+									<label>Radiocarpal Bone Distal Medial</label>
+									<select name="RadiocarpalBoneDistalMedial">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -149,6 +149,18 @@
 										<option value="6">Cyst-Like Lesion</option>
 									</select>
 								</p>
+								<p>
+									<label>Radiocarpal Bone Distal Lateral</label>
+									<select name="RadiocarpalBoneDistalLateral">
+										<option value="1">Not Assesed</option>
+										<option value="2">Within Normal Limits</option>
+										<option value="3">Lysis</option>
+										<option value="4">Sclerosis</option>
+										<option value="5">Fracture</option>
+										<option value="6">Cyst-Like Lesion</option>
+									</select>
+								</p>
+
 							</div>
 						</div>
 						<div>
@@ -157,8 +169,8 @@
 								<h3 class="alighn">Metacarpal 3</h3>
 								<label>Metacarpal 3 Proximal</label>
 								<p>
-									<label class=Metacarpal3selections>Metacarpal3 Proximal Dorsal</label>
-									<select class=Metacarpal3selections name="horse">
+									<label class=Metacarpal3selections>Metacarpal 3 Proximal Dorsal</label>
+									<select class=Metacarpal3selections name="Metacarpal3ProximalDorsal">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -169,7 +181,7 @@
 								</p>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Proximal Palmar</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3ProximalPalmar">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -181,7 +193,7 @@
 									<label>Metacarpal 3 Diaphysis</label>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Diaphysis Dorsal</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DiaphysisDorsal">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -192,7 +204,7 @@
 								</p>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Diaphysis Palmar</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DiaphysisPalmar">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -204,7 +216,7 @@
 								<label>Metacarpal 3 Distal</label>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Distal Dorsal Medial</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DistalDorsalMedial">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -215,7 +227,7 @@
 								</p>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Distal Dorsal Lateral</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DistalDorsalLateral">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -226,7 +238,7 @@
 								</p>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Distal Dorsal Sagittal Ridge</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DistalDorsalSagittalRidge">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -237,7 +249,7 @@
 								</p>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Distal Palmar Medial</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DistalPalmarMedial">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -248,7 +260,7 @@
 								</p>
 								<p>
 									<label class=Metacarpal3selections>Metacarpal 3 Distal Palmar Lateral</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DistalPalmarLateral">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -259,7 +271,7 @@
 								</p>
 								<p>
 								<label class=Metacarpal3selections>Metacarpal 3 Distal Palmar Sagittal Ridge</label>
-									<select class=Metacarpal3selections name="horse">
+									<select class=Metacarpal3selections name="Metacarpal3DistalPalmarSagittalRidge">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -276,7 +288,7 @@
 								<h3 class="alighn">Medial Sesamoid</h3>
 								<p>
 									<label>Medial Sesamoid Apical Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidApicalArticular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -287,7 +299,7 @@
 								</p>
 								<p>
 									<label>Medial Sesamoid Apical Non-Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidApicalNon-Articular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -298,7 +310,7 @@
 								</p>
 								<p>
 									<label>Medial Sesamoid Midbody Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidMidbodyArticular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -309,7 +321,7 @@
 								</p>
 								<p>
 									<label>Medial Sesamoid Midbody Non-Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidMidbodyNon-Articular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -320,7 +332,7 @@
 								</p>
 								<p>
 									<label>Medial Sesamoid Base Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidBaseArticular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -331,7 +343,7 @@
 								</p>
 								<p>
 									<label>Medial Sesamoid Base Non-Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidBaseNon-Articular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -342,7 +354,7 @@
 								</p>
 								<p>
 									<label>Medial Sesamoid Axial Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidAxialArticular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
@@ -353,7 +365,7 @@
 								</p>
 								<p>
 									<label>Medial Sesamoid Axial Non-Articular</label>
-									<select name="horse">
+									<select name="MedialSesamoidAxialNon-Articular">
 										<option value="1">Not Assesed</option>
 										<option value="2">Within Normal Limits</option>
 										<option value="3">Lysis</option>
