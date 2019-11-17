@@ -7,10 +7,13 @@
 
 //Registration of new user
 $horse = $_POST["horse"];
-$foreleg = $_POST["Foreleg"];
+$foreleg = $_POST["Action"];
 $hindleg = $_POST["Hindleg"];
 $race = $_POST["Race"];
-
+$DistalRadiusDorsomedial = $_POST["DistalRadiusDorsomedial"];
+$DistalRadiusDorsolateral = $_POST["DistalRadiusDorsolateral"];
+echo $DistalRadiusDorsomedial;
+echo $DistalRadiusDorsolateral;
 
 $host = 'localhost';//enter hostname
 $SQLuserName = 'debian-sys-maint';//enter user name of DB
@@ -24,7 +27,7 @@ $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
  if (!$mysqli) {
 	 echo "Could not connect to database \n";
 	 echo "Error: ". $mysqli->connect_error . "\n";
- }
+ }/*
  else{
 	if($horse == 1){	
 		echo "adding horse";
@@ -57,10 +60,7 @@ $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
 		 echo "edditing race";
 
 	}
-
-
-
-}
+ }*/
 
 
 ?>
