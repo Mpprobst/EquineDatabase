@@ -42,6 +42,34 @@
 					top:-800px;
 					left:700px;
 					}
+
+			.EuthBox{
+				position:relative;
+				top:-98px;
+				left:4px;
+				}
+			.EuthTrue{
+				display:none;
+				position:relative;
+				top:-112px;
+				left:4px;
+				}
+
+			.RoodRiddle{
+				position:relative;
+				top:-42px;
+				left:250px;
+				}
+			.Leg{
+				position:relative;
+				top:-64px;
+				left:625px;
+				}
+			.phantom{
+				position:relative;
+				top:-84px;
+				left:800px;
+				}
 		</style>
 			<meta charset="UTF-8"/>
 	</head>
@@ -64,11 +92,42 @@
 			<fieldset>
 				<legend>Assessment</legend>
 				<p>
-					<label>Foreleg</label>
+
+					<label>Action</label>	
 					<select name="Action">
-						<option value="1">Add</option>
-						<option value="2">Edit/View</option>
+						<option value="1">Add New</option>
+						<option value="2">Edit Existing</option>
 					</select>
+					
+
+					<div class="alighn" id="HorseName">
+					HorseName: <input type="text" name="horseName"><br><br>	
+					</div>
+											
+					<div class="RoodRiddle" id=RoodRiddle">
+					Rood and Riddle Case Number: <input type="text" name="RREH_CID">
+					</div>
+					
+					<div class="Leg" id="Leg">
+					<label>Side Assessed</label>
+					<select name="Action">
+						<option value="1">Left</option>					
+						<option value="1">Right</option>					
+					</select>
+					</div>
+
+					<div class="phantom" id="Phantom">
+					Phantom Density Normalization Included? <input type="checkbox" name="Phantom"><br><br>
+					</div>
+
+					<div class="EuthBox" id="isEuthanized">
+					Euthanized?: <input type="checkbox" onclick="openEuthanasiaDate(this.checked)" name="Euthanized?"><br><br>
+					</div>
+					
+					<div class="EuthTrue" id="EuthanasiaTrue">
+					Date of Euthanasia: <input type="date" name="euthanasiaDate">
+					UK Veterinary Diagnostic Case Number: <input type="text" name="UK_CID">
+					</div>
 
 					<button type="button" onclick="openForelimbForm()">Foreleg</button>
 					<div class="show" id="ForelimbForm">
@@ -396,6 +455,12 @@
 			</fieldset>
 		</form>
 		<script>
+			function openEuthanasiaDate(isChecked){
+				if (isChecked)
+					document.getElementById("EuthanasiaTrue").style.display="block";
+				else 
+					document.getElementById("EuthanasiaTrue").style.display="none";
+			}
 			function openForelimbForm(){
 				document.getElementById("ForelimbForm").style.display="block";
 				}
