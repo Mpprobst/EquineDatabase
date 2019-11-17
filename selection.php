@@ -16,8 +16,8 @@ echo $DistalRadiusDorsomedial;
 echo $DistalRadiusDorsolateral;
 
 $host = 'localhost';//enter hostname
-$SQLuserName = 'root';//enter user name of DB
-$Pass = 'Rycbar1234!'; //enter password
+$SQLuserName = 'debian-sys-maint';//enter user name of DB
+$Pass = 'ntKxkk9SI6zJjqEF'; //enter password
 $DB = 'equine'; //Enter database name
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
 
