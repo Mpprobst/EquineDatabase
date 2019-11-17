@@ -10,19 +10,44 @@
 			.show{
 				display:none;
 				position:relative;
-				top:20px;
-				border:3pxsolid#f1f1f1;
-				border-color:blue;
+				top:-30px;
+				}
+			.distalradiuscheckbox{
+					position:relative;
+					left:100px;
+					top:-40px;
+				}
+			.radiocarpalbonecheckbox{
+					position:relative;
+					left:215px;
+					top:-60px;
+					}
+			.metacarpal3checkbox{
+					position:relative;
+					left:360px;
+					top:-80px;
+					}
+			.medialseasamoidcheckbox{
+					position:relative;
+					left:475px;
+					top:-100px;
+					}
+
+			.typeofleg{
+					position:absolute;
+					top:370px;
+					left:28px;
+
 				}
 			.show1{
 				display:none;
-				position:relative;
-				top:-60px;
+				position:absolute;
+				top:100px;
 				left:100px;
 				}
 			.show2{
 				display:none;
-				position:relative;
+				position:absolute;
 				top:-250px;
 				left:500px;
 				}
@@ -34,7 +59,7 @@
 					}
 			.Metacarpal3selections{
 						position:relative;
-						left:20px;
+						left:4px;
 						}
 			.MedialSesamoid{
 					display:none;
@@ -45,14 +70,14 @@
 
 			.EuthBox{
 				position:relative;
-				top:-98px;
+				top:-94px;
 				left:4px;
 				}
 			.EuthTrue{
 				display:none;
 				position:relative;
-				top:-112px;
-				left:4px;
+				top:-100px;
+				left:100px;
 				}
 
 			.RoodRiddle{
@@ -110,7 +135,7 @@
 					
 					<div class="Leg" id="Leg">
 					<label>Side Assessed</label>
-					<select name="Action">
+					<select name="SideAssessed">
 						<option value="1">Left</option>					
 						<option value="1">Right</option>					
 					</select>
@@ -129,12 +154,25 @@
 					UK Veterinary Diagnostic Case Number: <input type="text" name="UK_CID">
 					</div>
 
-					<button type="button" onclick="openForelimbForm()">Foreleg</button>
+					<div class = "typeofleg">
+						<label>Leg</label>
+						<select id = "typeofleg" name="LimbType">
+							<option value="1">Foreleg</option>
+							<option value="2">Hindleg</option>
+						</select>
+						<button type="button" onclick="getOption()">Type of leg</button>
+						<button type="button" onclick="closeForelimbForm()">Close</button>
+
+					</div>
+
+
+
+
 					<div class="show" id="ForelimbForm">
 						<h2 class="alighn">Foreleg</h2>
-						<div>
-							<button type="button" onclick="openDistalRadius()">Distal Radius</button><br></br>
-							<div class="show1"id="DistalRadius">
+						<div class = "distalradiuscheckbox">
+							Distal Radius: <input type="checkbox" onclick="checkDistalRadius(this.checked)" name = "DistalRadius">
+							<div class="show1"id="Distal Radius">
 								<h3 class="alighn">Distal Radius</h3>
 								<p>
 									<label>Distal Radius Dorsomedial</label>
@@ -171,8 +209,8 @@
 								</p>
 							</div>
 						</div>
-						<div>
-							<button type="button" onclick="openRadiocarpalBone()">Radiocarpal Bone</button>
+						<div class = "radiocarpalbonecheckbox">
+							Radiocarpal Bone: <input type="checkbox" onclick="checkRadiocarpalBone(this.checked)" name = "RadiocarpalBone">
 							<div class="show2"id="Radiocarpal Bone">
 								<h3 class="alighn">Radiocarpal Bone</h3>
 								<p>
@@ -222,8 +260,8 @@
 
 							</div>
 						</div>
-						<div>
-							<button type="button" onclick="openMetacarpal3()">Metacarpal 3</button>
+						<div class = "metacarpal3checkbox">
+							Metacarpal 3: <input type="checkbox" onclick="checkMetacarpal3(this.checked)" name = "Metacarpal3">
 							<div class="Metacarpal3"id="Metacarpal 3">
 								<h3 class="alighn">Metacarpal 3</h3>
 								<label>Metacarpal 3 Proximal</label>
@@ -341,8 +379,8 @@
 								</p>
 							</div>
 						</div>
-						<div>
-							<button type="button" onclick="openMedialSesamoid()">Medial Sesamoid</button>
+						<div class = "medialseasamoidcheckbox">
+							Medial Sesamoid: <input type="checkbox" onclick="checkMedialSesamoid(this.checked)" name = "MedialSesamoid">
 							<div class="MedialSesamoid"id="MedialSesamoid">
 								<h3 class="alighn">Medial Sesamoid</h3>
 								<p>
@@ -473,6 +511,38 @@
 				else 
 					document.getElementById("EuthanasiaTrue").style.display="none";
 			}
+			function checkDistalRadius(isChecked){
+							if (isChecked)
+								openDistalRadius();
+							else 
+								closeDistalRadius();
+						}
+			function checkRadiocarpalBone(isChecked){
+							if (isChecked)
+								openRadiocarpalBone();
+							else 
+								closeRadiocarpalBone();
+						}
+			function checkMetacarpal3(isChecked){
+							if (isChecked)
+								openMetacarpal3();
+							else 
+								closeMetacarpal3();
+						}
+
+			function checkMedialSesamoid(isChecked){
+							if (isChecked)
+								openMedialSesamoid();
+							else 
+								closeMedialSesamoid();
+						}
+
+			function getOption() { 
+            					selectElement = document.querySelector('#typeofleg');
+						if(selectElement){
+							openForelimbForm();
+						}
+			}
 			function openForelimbForm(){
 				document.getElementById("ForelimbForm").style.display="block";
 				}
@@ -480,10 +550,10 @@
 				document.getElementById("ForelimbForm").style.display="none";
 			}
 			function openDistalRadius(){
-				document.getElementById("DistalRadius").style.display="block";
+				document.getElementById("Distal Radius").style.display="block";
 			}
 			function closeDistalRadius(){
-				document.getElementById("DistalRadius").style.display="none";
+				document.getElementById("Distal Radius").style.display="none";
 			}
 			function openRadiocarpalBone(){
 				document.getElementById("Radiocarpal Bone").style.display="Block";
