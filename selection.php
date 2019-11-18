@@ -10,10 +10,17 @@ $horse = $_POST["horse"];
 $foreleg = $_POST["Action"];
 $hindleg = $_POST["Hindleg"];
 $race = $_POST["Race"];
-$DistalRadiusDorsomedial = $_POST["DistalRadiusDorsomedial"];
+$RadiocarpalBone= $_POST["RadiocarpalBone"];
 $DistalRadiusDorsolateral = $_POST["DistalRadiusDorsolateral"];
-echo $DistalRadiusDorsomedial;
 echo $DistalRadiusDorsolateral;
+if($RadiocarpalBone== true){	
+		echo "true";
+	}
+if($RadiocarpalBone== false){	
+		echo "false";
+	}
+
+
 
 $host = 'localhost';//enter hostname
 $SQLuserName = 'debian-sys-maint';//enter user name of DB
