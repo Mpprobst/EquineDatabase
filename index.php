@@ -1,5 +1,10 @@
 <html>
 <head>
+<?php
+if(isset($_COOKIE["equine_database"])) {
+	header( "Location: http://172.31.147.164/equine/home.php");
+}
+?>
 	<title>Equine Project | Login (Milestone 3)</title>
 	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
 </head>

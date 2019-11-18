@@ -14,7 +14,7 @@ function register($newName,$newPass,$mysqli){
 	}
 	else{
 		//inserting user into User table
-		$insertQuery = "INSERT INTO User (Name, Pass) VALUES('$newName','$newPass')";
+		$insertQuery = "INSERT INTO User (Name, Pass, Clinic, Role) VALUES('$newName','$newPass', 'default-clinic', 'read-only')";
 		$res = $mysqli->query($insertQuery);
 		if($res){
 			echo "<h2>".$newName.": Created succesfully</h2>";
@@ -26,10 +26,13 @@ function register($newName,$newPass,$mysqli){
 	}
 }
 function login($Username,$Password,$mysqli){
-	$existingUser = "SELECT Name, Pass from User where (User.Name = '$Username') and (User.Pass ='$Password')";
+	$existingUser = "SELECT * FROM User WHERE (User.Name = '$Username') and (User.Pass ='$Password')";
 	$res = $mysqli->query($existingUser);
 	// if the user exists print out his information to show that it is actually in the table
 	if($res->num_rows >0){
+		$row= mysqli_fetch_array($res, MYSQLI_ASSOC);
+		$value= $row["Name"].",".$row["Role"].",".$row["Clinic"];
+		setcookie("equine_database", $value, time()+24*60*60);
 		echo "<h3>".$Username.", You are now logged in</h3>";
 		echo "<table border='1'>";
 		while($row = $res->fetch_assoc())
@@ -42,7 +45,7 @@ function login($Username,$Password,$mysqli){
 			echo "</tr>";
 		}
 		echo "</table>";
-		header( "Location: http://172.31.144.101/homepage.php" );
+		header( "Location: http://172.31.147.164/equine/home.php" );
 		exit ;
 	}
 	else
@@ -58,11 +61,12 @@ $Password = $_POST["password"];
 //echo $newPass;
 //echo $Username;
 //echo $Password;
-echo "here";
-$host = 'localhost';//enter hostname
-$SQLuserName = 'debian-sys-maint';//enter user name of DB
-$Pass = 'ntKxkk9SI6zJjqEF'; //enter password
-$DB = 'equine'; //Enter database name
+//echo "here";
+//$host = 'localhost';//enter hostname
+//$SQLuserName = 'read-write';//enter user name of DB
+//$Pass = 'shakespeare16'; //enter password
+//$DB = 'equine'; //Enter database name
+require("./assets/php/mysql_connector.php");
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
 
 // Check for connection error

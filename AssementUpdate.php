@@ -1,9 +1,10 @@
 <?php 
-$servername = "localhost";
-$username="root";
-$password="Password1";
-$dbname="equine";
-$conn= mysqli_connect($servername,$username,$password,$dbname);
+//$servername = "localhost";
+//$username="root";
+//$password="Password1";
+//$dbname="equine";
+require("./assets/php/mysql_connector.php");
+$conn= mysqli_connect($host,$SQLuserName,$Pass,$DB);
 
 //variables and arrays
 $side = $_POST["SideAssessed"];
