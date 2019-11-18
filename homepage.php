@@ -15,22 +15,22 @@
 			.distalradiuscheckbox{
 					position:relative;
 					left:100px;
-					top:-40px;
+					top:-25px;
 				}
 			.radiocarpalbonecheckbox{
 					position:relative;
 					left:215px;
-					top:-60px;
+					top:-45px;
 					}
 			.metacarpal3checkbox{
 					position:relative;
 					left:360px;
-					top:-80px;
+					top:-65px;
 					}
 			.medialseasamoidcheckbox{
 					position:relative;
 					left:475px;
-					top:-100px;
+					top:-85px;
 					}
 
 			.typeofleg{
@@ -42,30 +42,30 @@
 			.show1{
 				display:none;
 				position:absolute;
-				top:100px;
+				//top:10px;
 				left:100px;
 				}
 			.show2{
 				display:none;
 				position:absolute;
-				top:-250px;
+				//top:-250px;
 				left:500px;
 				}
 			.Metacarpal3{
 					display:none;
-					position:relative;
-					top:-250px;
-					left:140px;
+					position:absolute;
+					top:230px;
+					left:-160px;
 					}
 			.Metacarpal3selections{
 						position:relative;
-						left:4px;
+						left:15px;
 						}
 			.MedialSesamoid{
 					display:none;
-					position:relative;
-					top:-800px;
-					left:700px;
+					position:absolute;
+					top:230px;
+					left:200px;
 					}
 
 			.EuthBox{
@@ -95,6 +95,15 @@
 				top:-84px;
 				left:800px;
 				}
+			.assesmet{
+					height: 1040px;
+				}
+			.submit{
+					position: absolute;
+					top:1220px;
+
+				}
+
 		</style>
 			<meta charset="UTF-8"/>
 	</head>
@@ -114,7 +123,7 @@
 			</fieldset>
 		</form>
 		<form action="selection.php" method="post">
-			<fieldset>
+			<fieldset class = "assesmet">
 				<legend>Assessment</legend>
 				<p>
 
@@ -475,7 +484,7 @@
 						</div>
 					</div>
 				</p>
-			<button type="submit">Submit</button>
+			<button class = "submit" type="submit">Submit</button>
 			</fieldset>
 		</form>
 		<form action="selection.php"method="post">
