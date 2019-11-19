@@ -18,12 +18,11 @@ if(isset($_COOKIE["equine_database"])) {
 
 	echo "<ul class=\"button-list\">";
 
-	echo "<li><a class=\"button\">View Horse</a></li>";
-	echo "<li><a class=\"button\">View Assessment</a></li>";
+	echo "<li><a class=\"button\" href=\"SearchHorse.php\">Select Horse</a></li>";
+	echo "<li><a class=\"button\" href=\"homepage.php\">Assessment Homepage</a></li>";
 	if($cookie_array[1] == "read-write") {
-		echo "<li><a class=\"button\">Manage/Add/Edit Horse</a></li>";
-		echo "<li><a class=\"button\">Submit an Assessment</a></li>";	
-		echo "<li><a class=\"button\">Manage a user</a></li>";
+		echo "<li><a class=\"button\" href=\"NewHorse.php\">Add New Horse</a></li>";
+		echo "<li><a class=\"button\" href=\"SearchUser.php\">Manage a User</a></li>";
 	}
 	echo "<li><a href=\"./logout.php\" class=\"button background-medium-gray\">Logout</a></li>";
 	echo "</ul>";

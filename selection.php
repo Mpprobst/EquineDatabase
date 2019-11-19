@@ -22,10 +22,11 @@ if($RadiocarpalBone== false){
 
 
 
-$host = 'localhost';//enter hostname
-$SQLuserName = 'debian-sys-maint';//enter user name of DB
-$Pass = 'ntKxkk9SI6zJjqEF'; //enter password
-$DB = 'equine'; //Enter database name
+//$host = 'localhost';//enter hostname
+//$SQLuserName = 'debian-sys-maint';//enter user name of DB
+//$Pass = 'ntKxkk9SI6zJjqEF'; //enter password
+//$DB = 'equine'; //Enter database name
+require("assets/sql/mysql_connector.php");
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
 
 // Check for connection error
