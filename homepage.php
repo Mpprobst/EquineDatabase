@@ -109,7 +109,7 @@
 	</head>
 	<body>
 		<h1>Welcome To the Home Page</h1>
-		<form action="selection.php"method="post">
+		<form action="AssessmentUpdate.php"method="post">
 			<fieldset>
 				<legend>horse</legend>
 				<p>
@@ -122,7 +122,7 @@
 			<button type="submit">Submit</button>
 			</fieldset>
 		</form>
-		<form action="selection.php" method="post">
+		<form action="AssessmentUpdate.php" method="post">
 			<fieldset class = "assesmet">
 				<legend>Assessment</legend>
 				<p>
