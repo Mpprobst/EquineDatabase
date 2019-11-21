@@ -108,6 +108,12 @@
 			<meta charset="UTF-8"/>
 	</head>
 	<body>
+<?php
+
+if(isset($_COOKIE["equine_database"])){
+
+?>
+
 		<h1>Welcome To the Home Page</h1>
 		<form action="AssessmentUpdate.php"method="post">
 			<fieldset>
@@ -584,6 +590,10 @@
 			}
 
 		</script>
-	
+<?php
+} else {
+	echo "You are not logged in. <a href=\"index.php\">Return to login<a> ";
+}
+?>
 </body>
 </html>

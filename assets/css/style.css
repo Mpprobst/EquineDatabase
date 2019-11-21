@@ -50,6 +50,20 @@ body {
 .text-wildcat-black{
 	color: #2C2A29;
 }
+.button {
+	background-color: #0033A0;
+	border-radius: .5rem;
+	color: white;
+	padding: .5rem 2rem;
+	margin-top: .5rem;
+	text-align: center;
+	display: inline-block;	
+	cursor: pointer;
+	text-decoration: none;
+}
+.button-list {
+	list-style-type: none;
+}
 
 /*Text Colors - Secondary*/
 .text-light-blue {
@@ -75,4 +89,6 @@ body {
 .background-wildcat-blue {
 	background-color: #0033A0;
 }
-
+.background-medium-gray {
+	background-color: #A5ACAF;
+}
