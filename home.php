@@ -24,13 +24,14 @@ if(isset($_COOKIE["equine_database"])) {
 		echo "<li><a class=\"button\" href=\"NewHorse.php\">Add New Horse</a></li>";
 		echo "<li><a class=\"button\" href=\"SearchUser.php\">Manage a User</a></li>";
 	}
-	echo "<li><a href=\"./logout.php\" class=\"button background-medium-gray\">Logout</a></li>";
+	echo "<li><a href=\"functions/php/logout.php\" class=\"button background-medium-gray\">Logout</a></li>";
 	echo "</ul>";
 	if($cookie_array[1] == "read-only") {
 		echo "<p>If you require more than read-only access, please contact any user with write permissions</p>";
 	}
 } else {
 	echo "Not Logged In";
+	header("Location: http://172.31.147.164/equine/");
 }
 ?>
 </body>

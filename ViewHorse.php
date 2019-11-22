@@ -16,7 +16,7 @@ if (isset($_COOKIE["equine_database"])) {
 	$hid = $_GET["id"];
 	$query = "SELECT * FROM Horse WHERE Hid = '$hid'";
 
-	require("assets/php/mysql_connector.php");
+	require("functions/php/mysql_connector.php");
 	$conn= mysqli_connect($host,$ROuserName, $ROPass, $DB);
 
 	if(!$conn) {
@@ -35,7 +35,8 @@ if (isset($_COOKIE["equine_database"])) {
 <a class="button" href="home.php">Back</a>
 <?php
 } else {
-        echo "Not Logged In";
+		echo "Not Logged In";
+		header("Location: http://172.31.147.164/equine/");
 }
 ?>
 </body>

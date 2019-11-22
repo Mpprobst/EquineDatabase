@@ -17,19 +17,22 @@ INSERT INTO User VALUES (NULL, 'Admin', 'admin', 'default-clinic', 'read-write')
 -- Create Horse Table
 CREATE TABLE Horse (
         Hid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        Hname TEXT NOT NULL, Hdob DATE NOT NULL,
+        Hname TEXT NOT NULL, 
+        Hdob DATE NOT NULL,
         Hdod DATE,
         Hbreed TEXT NOT NULL,
         Hgender TEXT NOT NULL,
+        UK_Cid TEXT,
+        RREH_Cid TEXT NOT NULL,
         RaceTraining BOOL,
         RaceExternal BOOL,
-        RaceStartAge DATE
+        RaceStartAge INT
         );
 
--- Create Horse Sample Data. Uncomment any line to use that sample horse
+-- Create Horse Sample Data.
 
-# INSERT INTO Horse VALUES (NULL, 'horsie', '1999-11-11', NULL, 'mustang', 'filly', NULL, NULL, NULL);
-# INSERT INTO Horse VALUES (NULL, 'pony', '2019-10-28', NULL, 'thoroughbred', 'mare', NULL, NULL, NULL);
+INSERT INTO Horse VALUES (NULL, 'Horsie', '1999-11-11', NULL, 'arabian', 'intact-male', NULL, '123456789', NULL, NULL, NULL);
+INSERT INTO Horse VALUES (NULL, 'Pony', '1999-11-11', NULL, 'thoroughbred', 'female', NULL, '123412341', NULL, NULL, NULL);
 
 -- PathologySite table creation and population. Pathology Site is the physical location being assessed on a form.
 
@@ -365,12 +368,3 @@ CREATE TABLE CasePathology (
         );
 
 -- We can generate sample data here.
-
-/*Create users for php calls to mysql database. Uncomment lines to use.*/
-# CREATE user 'read-write'@'localhost' identified by 'shakespeare16';
-# GRANT SELECT, INSERT, UPDATE ON equine.* to 'read-write'@'localhost';
-# FLUSH privileges;
-
-# Create user 'read-only'@'localhost' identified by 'bookworm12';
-# GRANT SELECT ON equine.* to 'read-only'@'localhost';
-# FLUSH privileges;
