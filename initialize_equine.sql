@@ -202,6 +202,123 @@ INSERT INTO PathologyAtSite VALUES (6, 4);
 INSERT INTO PathologyAtSite VALUES (7, 4);
 INSERT INTO PathologyAtSite VALUES (3, 5); -- Forelimb Radiocarpal Bone
 INSERT INTO PathologyAtSite VALUES (4, 6); -- Forelimb Radiocarpal Bone Proximal Medial
+INSERT INTO PathologyAtSite VALUES (5, 6);
+INSERT INTO PathologyAtSite VALUES (8, 6);
+INSERT INTO PathologyAtSite VALUES (6, 6);
+INSERT INTO PathologyAtSite VALUES (7, 6);
+INSERT INTO PathologyAtSite VALUES (4, 7); -- Forelimb Radiocarpal Bone Proximal Lateral
+INSERT INTO PathologyAtSite VALUES (5, 7);
+INSERT INTO PathologyAtSite VALUES (8, 7);
+INSERT INTO PathologyAtSite VALUES (6, 7);
+INSERT INTO PathologyAtSite VALUES (7, 7);
+INSERT INTO PathologyAtSite VALUES (4, 8); -- Forelimb Radiocarpal Bone Distal Medial
+INSERT INTO PathologyAtSite VALUES (5, 8);
+INSERT INTO PathologyAtSite VALUES (8, 8);
+INSERT INTO PathologyAtSite VALUES (6, 8);
+INSERT INTO PathologyAtSite VALUES (7, 8);
+INSERT INTO PathologyAtSite VALUES (4, 9); -- Forelimb Radiocarpal Bone Distal Lateral
+INSERT INTO PathologyAtSite VALUES (5, 9);
+INSERT INTO PathologyAtSite VALUES (8, 9);
+INSERT INTO PathologyAtSite VALUES (6, 9);
+INSERT INTO PathologyAtSite VALUES (7, 9);
+INSERT INTO PathologyAtSite VALUES (3, 10); -- Forelimb Metacarpal 3
+INSERT INTO PathologyAtSite VALUES (3, 11); -- Forelimb Metacarpal 3 Proximal
+INSERT INTO PathologyAtSite VALUES (4, 12); -- Forelimb Metacarpal 3 Proximal Dorsal
+INSERT INTO PathologyAtSite VALUES (5, 12);
+INSERT INTO PathologyAtSite VALUES (9, 12);
+INSERT INTO PathologyAtSite VALUES (10, 12);
+INSERT INTO PathologyAtSite VALUES (8, 12);
+INSERT INTO PathologyAtSite VALUES (11, 12);
+INSERT INTO PathologyAtSite VALUES (6, 12);
+INSERT INTO PathologyAtSite VALUES (7, 12);
+INSERT INTO PathologyAtSite VALUES (4, 13); -- Forelimb Metacarpal 3 Proximal Palmar
+INSERT INTO PathologyAtSite VALUES (5, 13);
+INSERT INTO PathologyAtSite VALUES (9, 13);
+INSERT INTO PathologyAtSite VALUES (10, 13);
+INSERT INTO PathologyAtSite VALUES (8, 13);
+INSERT INTO PathologyAtSite VALUES (11, 13);
+INSERT INTO PathologyAtSite VALUES (6, 13);
+INSERT INTO PathologyAtSite VALUES (7, 13);
+INSERT INTO PathologyAtSite VALUES (3, 14); -- Forelimb Metacarpal 3 Diaphysis
+INSERT INTO PathologyAtSite VALUES (4, 15); -- Forelimb Metacarpal 3 Diaphysis Dorsal
+INSERT INTO PathologyAtSite VALUES (5, 15);
+INSERT INTO PathologyAtSite VALUES (9, 15);
+INSERT INTO PathologyAtSite VALUES (10, 15);
+INSERT INTO PathologyAtSite VALUES (12, 15);
+INSERT INTO PathologyAtSite VALUES (13, 15);
+INSERT INTO PathologyAtSite VALUES (14, 15);
+INSERT INTO PathologyAtSite VALUES (4, 16); -- Forelimb Metacarpal 3 Diaphysis Palmar
+INSERT INTO PathologyAtSite VALUES (5, 16);
+INSERT INTO PathologyAtSite VALUES (9, 16);
+INSERT INTO PathologyAtSite VALUES (10, 16);
+INSERT INTO PathologyAtSite VALUES (12, 16);
+INSERT INTO PathologyAtSite VALUES (13, 16);
+INSERT INTO PathologyAtSite VALUES (14, 16);
+INSERT INTO PathologyAtSite VALUES (3, 17); -- Forelimb Metacarpal 3 Distal
+INSERT INTO PathologyAtSite VALUES (4, 18); -- Forelimb Metacarpal 3 Distal Dorsal Medial
+INSERT INTO PathologyAtSite VALUES (5, 18);
+INSERT INTO PathologyAtSite VALUES (8, 18);
+INSERT INTO PathologyAtSite VALUES (6, 18);
+INSERT INTO PathologyAtSite VALUES (7, 18);
+INSERT INTO PathologyAtSite VALUES (4, 19); -- Forelimb Metacarpal 3 Distal Dorsal Lateral
+INSERT INTO PathologyAtSite VALUES (5, 19);
+INSERT INTO PathologyAtSite VALUES (8, 19);
+INSERT INTO PathologyAtSite VALUES (6, 19);
+INSERT INTO PathologyAtSite VALUES (7, 19);
+INSERT INTO PathologyAtSite VALUES (4, 20); -- Forelimb Metacarpal 3 Distal Dorsal Sagittal Ridge
+INSERT INTO PathologyAtSite VALUES (5, 20);
+INSERT INTO PathologyAtSite VALUES (8, 20);
+INSERT INTO PathologyAtSite VALUES (6, 20);
+INSERT INTO PathologyAtSite VALUES (7, 20);
+INSERT INTO PathologyAtSite VALUES (4, 21); -- Forelimb Metacarpal 3 Distal Palmar Medial
+INSERT INTO PathologyAtSite VALUES (5, 21);
+INSERT INTO PathologyAtSite VALUES (8, 21);
+INSERT INTO PathologyAtSite VALUES (6, 21);
+INSERT INTO PathologyAtSite VALUES (7, 21);
+INSERT INTO PathologyAtSite VALUES (15, 21);
+INSERT INTO PathologyAtSite VALUES (16, 21);
+INSERT INTO PathologyAtSite VALUES (4, 22); -- Forelimb Metacarpal 3 Distal Palmar Lateral
+INSERT INTO PathologyAtSite VALUES (5, 22);
+INSERT INTO PathologyAtSite VALUES (8, 22);
+INSERT INTO PathologyAtSite VALUES (6, 22);
+INSERT INTO PathologyAtSite VALUES (7, 22);
+INSERT INTO PathologyAtSite VALUES (15, 22);
+INSERT INTO PathologyAtSite VALUES (16, 22);
+INSERT INTO PathologyAtSite VALUES (4, 23); -- Forelimb Metacarpal 3 Distal Palmar Sagittal Ridge
+INSERT INTO PathologyAtSite VALUES (5, 23);
+INSERT INTO PathologyAtSite VALUES (8, 23);
+INSERT INTO PathologyAtSite VALUES (6, 23);
+INSERT INTO PathologyAtSite VALUES (7, 23);
+INSERT INTO PathologyAtSite VALUES (15, 23);
+INSERT INTO PathologyAtSite VALUES (16, 23);
+INSERT INTO PathologyAtSite VALUES (3, 24); -- Forelimb Medial Sesamoid
+INSERT INTO PathologyAtSite VALUES (4, 25); -- Forelimb Medial Sesamoid Apical Articular
+INSERT INTO PathologyAtSite VALUES (5, 25);
+INSERT INTO PathologyAtSite VALUES (7, 25);
+INSERT INTO PathologyAtSite VALUES (4, 26); -- Forelimb Medial Sesamoid Apical Non-Articular
+INSERT INTO PathologyAtSite VALUES (5, 26);
+INSERT INTO PathologyAtSite VALUES (7, 26);
+INSERT INTO PathologyAtSite VALUES (4, 27); -- Forelimb Medial Sesamoid Midbody Articular
+INSERT INTO PathologyAtSite VALUES (5, 27);
+INSERT INTO PathologyAtSite VALUES (7, 27);
+INSERT INTO PathologyAtSite VALUES (4, 28); -- Forelimb Medial Sesamoid Midbody Non-Articular
+INSERT INTO PathologyAtSite VALUES (5, 28);
+INSERT INTO PathologyAtSite VALUES (7, 28);
+INSERT INTO PathologyAtSite VALUES (4, 29); -- Forelimb Medial Sesamoid Base Articular
+INSERT INTO PathologyAtSite VALUES (5, 29);
+INSERT INTO PathologyAtSite VALUES (7, 29);
+INSERT INTO PathologyAtSite VALUES (4, 30); -- Forelimb Medial Sesamoid Base Non-Articular
+INSERT INTO PathologyAtSite VALUES (5, 30);
+INSERT INTO PathologyAtSite VALUES (7, 30);
+INSERT INTO PathologyAtSite VALUES (4, 31); -- Forelimb Medial Sesamoid Axial Articular
+INSERT INTO PathologyAtSite VALUES (5, 31);
+INSERT INTO PathologyAtSite VALUES (7, 31);
+INSERT INTO PathologyAtSite VALUES (4, 32); -- Forelimb Medial Sesamoid Axial Non-Articular
+INSERT INTO PathologyAtSite VALUES (5, 32);
+INSERT INTO PathologyAtSite VALUES (7, 32);
+
+
+
 
 -- Create Assessment Table. This is the root element for the forms containing basic data and an identifier used for the CasePathology table.
 
