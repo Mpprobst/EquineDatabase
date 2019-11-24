@@ -493,7 +493,7 @@ if(isset($_COOKIE["equine_database"])){
 			<button class = "submit" type="submit">Submit</button>
 			</fieldset>
 		</form>
-		<form action="selection.php"method="post">
+		<form action="functions/php/selection.php"method="post">
 			<fieldset>
 				<legend>Hindleg Assessment</legend>
 				<p>
@@ -506,7 +506,7 @@ if(isset($_COOKIE["equine_database"])){
 				</p>
 			</fieldset>
 		</form>
-		<form action="selection.php"method="post">
+		<form action="functions/php/selection.php"method="post">
 			<fieldset>
 				<legend>Race Training Clinical</legend>
 				<p>
@@ -592,7 +592,8 @@ if(isset($_COOKIE["equine_database"])){
 		</script>
 <?php
 } else {
-	echo "You are not logged in. <a href=\"index.php\">Return to login<a> ";
+	echo "You are not logged in.";
+	header("Location: http://172.31.147.164/equine/");
 }
 ?>
 </body>

@@ -20,7 +20,7 @@ if (isset($_COOKIE["equine_database"])) {
 <?php
         if(isset($_POST["search"])) {
 //              $cookie_array = explode(",", $_COOKIE["equine_database"]);
-                require("assets/php/mysql_connector.php");
+                require("functions/php/mysql_connector.php");
                 $mysqli = mysqli_connect($host, $ROuserName,$ROPass,$DB);
                 $query = "SELECT * FROM User  WHERE User.Name LIKE '". $_POST['search']. "%'";
                 $result = $mysqli->query($query);
@@ -30,8 +30,8 @@ if (isset($_COOKIE["equine_database"])) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 			echo "<tr><td>".$row['Name']."</td>";
 			echo "<td>".$row['Role']."</td>";
-			echo "<td><a href='GrantRoles.php?id=".$row["uid"]."'>Grant Write Permissions</a></td>";
-			echo "<td><a href='RevokeRoles.php?id=".$row["uid"]."'>Revoke Write Permissions</a></td></tr>";
+			echo "<td><a href='admin/php/GrantRoles.php?id=".$row["uid"]."'>Grant Write Permissions</a></td>";
+			echo "<td><a href='admin/php/RevokeRoles.php?id=".$row["uid"]."'>Revoke Write Permissions</a></td></tr>";
                 }
                         echo "</tbody></table>";
                 } else {
@@ -43,6 +43,7 @@ if (isset($_COOKIE["equine_database"])) {
 <?php
 } else {
         echo "Not Logged In";
+        header("Location: http://172.31.147.164/equine/");
 }
 ?>
 </body>

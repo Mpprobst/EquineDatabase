@@ -25,7 +25,7 @@ if(isset($_COOKIE["equine_database"])) {
 
 		<div class="input-form input-form-bordered input-form-collapsed" id="register">
 			<h3>Register</h3>
-			<form action="registration.php"  method="post">
+			<form action="functions/php/registration.php"  method="post">
 				Username: <input type="text" name="rusername"><br><br>
 				Password: <input type="text" name="rpassword"><br><br>
 				<button type="submit">Submit</button>

@@ -20,7 +20,7 @@ if (isset($_COOKIE["equine_database"])) {
 <?php
 	if(isset($_POST["search"])) {
 //    		$cookie_array = explode(",", $_COOKIE["equine_database"]);
-		require("assets/php/mysql_connector.php");
+		require("functions/php/mysql_connector.php");
 		$mysqli = mysqli_connect($host, $ROuserName,$ROPass,$DB);
 		$query = "SELECT * FROM Horse WHERE Horse.Hname LIKE '". $_POST['search']. "%'";
 		$result = $mysqli->query($query);
@@ -40,6 +40,7 @@ if (isset($_COOKIE["equine_database"])) {
 <?php
 } else {
 	echo "Not Logged In";
+	header("Location: http://172.31.147.164/equine/");
 }
 ?>
 </body>
