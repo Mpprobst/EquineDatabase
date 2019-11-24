@@ -50,11 +50,9 @@ if(!$conn){ //checking connection to database
 }
 if ($isEuthanized) {
 	$sql .= "INSERT INTO PathologyCase (Chorse, Cuser, Cdate, UK_Cid, RREH_Cid, Limb, PhantomDensityIncluded) VALUES ((SELECT Hid FROM Horse WHERE Horse.Hname = '$horseName'), 1, '2019-11-18', $UK_CID, $RREH_CID, $limb, $isPhantomDensity)";
-
 }
 else {
 	$sql .= "INSERT INTO PathologyCase (Chorse, Cuser, Cdate, RREH_Cid, Limb, PhantomDensityIncluded) VALUES ((SELECT Hid FROM Horse WHERE Horse.Hname = '$horseName'), 1, '2019-11-18', $RREH_CID, $limb, $isPhantomDensity)";
-
 }
 /*
 //for loop through each limb to add assement
