@@ -356,7 +356,7 @@ CREATE TABLE CasePathology (
         PRIMARY KEY(Cid, Sid, Pid),
 
         FOREIGN KEY(Cid)
-                REFERENCES PathologyCase(Cid)
+                REFERENCES Assessment(Cid)
                 ON UPDATE CASCADE ON DELETE CASCADE,
 
         FOREIGN KEY(Sid)
