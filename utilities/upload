@@ -5,7 +5,8 @@ SITE=/var/www/html/equine
 if test -e "$SITE"; then
 	sudo rm -r $SITE
 fi
-sudo mkdir $SITE
-sudo cp *.php  $SITE
-sudo cp -r assets $SITE
-#sudo cp *.html /var/www/html/ 
+sudo cp ../*.php  $SITE # Copy all php pages from site root
+sudo cp -r ../admin $SITE # Copy admin
+sudo cp -r ../analytics $SITE # Copy analytics
+sudo cp -r ../assets $SITE # Copy assets
+sudo cp -r ../functions $SITE # Copy functions 

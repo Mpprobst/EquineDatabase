@@ -79,6 +79,7 @@ INSERT INTO PathologySite VALUES (NULL, 'Forelimb', 'Distal Radius', NULL, NULL)
         (NULL, 'Forelimb', 'Medial Sesamoid', 'Axial Articular', NULL),
         (NULL, 'Forelimb', 'Medial Sesamoid', 'Axial Non-Articular', NULL);
 
+INSERT INTO PathologySite 
 -- Create Pathology table. Pathologies are the specific options selectable for each Site in an assessment.
 
 CREATE TABLE Pathology (

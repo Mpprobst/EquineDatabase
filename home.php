@@ -1,13 +1,18 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
-	<title>Equine Project | Home (Milestone 4)</title>
-	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
+	<title>Equine Project | Home</title>
 	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+	<div class="container">
 <?php
 if(isset($_COOKIE["equine_database"])) {
 	$cookie_array = explode(",", $_COOKIE["equine_database"]);
@@ -34,6 +39,7 @@ if(isset($_COOKIE["equine_database"])) {
 	header("Location: http://172.31.147.164/equine/");
 }
 ?>
+	</div>
 </body>
 
 </html>
