@@ -1,6 +1,6 @@
 #!/bin/bash
 # copies all necessary files in this directory to the var folder 
-SITE=/var/www/html/equine
+SITE=/var/www/html/equine/
 
 if test -e "$SITE"; then
 	sudo rm -r $SITE
