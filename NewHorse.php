@@ -9,6 +9,7 @@
 
 <body>
 <?php
+require("assets/php/redirect_helper.php");
 if(isset($_COOKIE["equine_database"])) {
 	$cookie_array = explode(",", $_COOKIE["equine_database"]);
 	if($cookie_array[1] == "read-write") {
@@ -68,11 +69,11 @@ if(isset($_COOKIE["equine_database"])) {
 
 	} else {
 		echo "Insufficient Privileges";
-		header("Location: http://172.31.147.164/equine/home.php");
+		header("Location: http://".$ip."/equine/home.php");
 	}
 } else {
 	echo "Not logged in";
-	header("Location: http://172.31.147.164/equine/");
+	header("Location: http://".$ip."/equine/");
 }
 
 if(isset($_POST["Hname"])) {

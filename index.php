@@ -1,8 +1,9 @@
 <html>
 <head>
 <?php
+require("assets/php/redirect_helper.php");
 if(isset($_COOKIE["equine_database"])) {
-	header( "Location: http://172.31.147.164/equine/home.php");
+	header( "Location: http://".$ip."/equine/home.php");
 }
 ?>
 	<title>Equine Project | Login (Milestone 3)</title>
@@ -16,7 +17,7 @@ if(isset($_COOKIE["equine_database"])) {
 <div class="container">
 		<div class="input-form" id="Login">
                         <h3>Login:</h3>
-                        <form class="input-form-bordered" action="registration.php" method="post">
+                        <form class="input-form-bordered" action="functions/php/registration.php" method="post">
                                 Username: <input type="text" name="username"><br><br>
                                 Password: <input type="text" name="password"><br><br>
                                 <button type="submit">Submit</button>                                
