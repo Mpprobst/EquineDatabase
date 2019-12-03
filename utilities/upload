@@ -1,11 +1,12 @@
 #!/bin/bash
 # copies all necessary files in this directory to the var folder 
-SITE=/var/www/html/equine/
+SITE="/var/www/html/equine"
 
 if test -e "$SITE"; then
 	sudo rm -r $SITE
 fi
-sudo cp ../*.php  $SITE # Copy all php pages from site root
+sudo mkdir $SITE
+sudo cp ../*.php $SITE  # Copy all php pages from site root
 sudo cp -r ../admin $SITE # Copy admin
 sudo cp -r ../analytics $SITE # Copy analytics
 sudo cp -r ../assets $SITE # Copy assets
