@@ -3,8 +3,12 @@
 
 <head>
 	<title>Equine Project | Add a New Horse</title>
-	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
 	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -15,7 +19,7 @@ if(isset($_COOKIE["equine_database"])) {
 	if($cookie_array[1] == "read-write") {
 ?>
 	<h1>Add a Horse to the Database</h1>
-	<form method="post" action="NewHorse.php">
+	<form method="post" action="functions/php/InsertHorse.php">
 	<h2>Signalment<h2>
 		<label for="Hname">Horse's name:</label>
 		<input type="text" name="Hname" required />
