@@ -36,7 +36,8 @@ if(isset($_COOKIE["equine_database"])) {
 	}
 } else {
 	echo "Not Logged In";
-	header("Location: http://172.31.147.164/equine/");
+	require("assets/php/request_helper.php");
+	header("Location: http://" . $ip . "/equine/");
 }
 ?>
 	</div>

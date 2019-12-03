@@ -1,12 +1,18 @@
 <html>
 <head>
 <?php
+require("assets/php/redirect_helper.php");
 if(isset($_COOKIE["equine_database"])) {
-	header( "Location: http://172.31.147.164/equine/home.php");
+	header( "Location: http://".$ip."/equine/home.php");
 }
 ?>
 	<title>Equine Project | Login (Milestone 3)</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">
 	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 	<body>
 
