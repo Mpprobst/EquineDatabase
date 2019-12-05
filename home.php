@@ -13,6 +13,8 @@
 
 <body>
 	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
 <?php
 if(isset($_COOKIE["equine_database"])) {
 	$cookie_array = explode(",", $_COOKIE["equine_database"]);
@@ -40,6 +42,8 @@ if(isset($_COOKIE["equine_database"])) {
 	header("Location: http://" . $ip . "/equine/");
 }
 ?>
+			</div>
+		</div>
 	</div>
 </body>
 

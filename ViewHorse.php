@@ -12,10 +12,13 @@
 </head>
 
 <body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
 <?php
 if (isset($_COOKIE["equine_database"])) {
 ?>
-<h1>Horse Viewer</h1>
+				<h1>Horse Viewer</h1>
 <?php
 	$hid = $_GET["id"];
 	$query = "SELECT * FROM Horse WHERE Hid = '$hid'";
@@ -37,7 +40,12 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "Breed: ".$row["Hbreed"]."<br />";
 		echo "Gender: ".$row["Hgender"]."<br />";
 	}
-
+?>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+<?php
 	echo "<h2>Pathology Assessments for " . $horseName . "</h2>";
 	$assessQuery = "SELECT * FROM Assessment INNER JOIN User ON Assessment.Cuser = User.uid WHERE Assessment.Chorse = '$hid'";
 	$assessments = $conn->query($assessQuery);
@@ -57,7 +65,7 @@ if (isset($_COOKIE["equine_database"])) {
 	echo "</table>"
 
 ?>
-<a class="button" href="home.php">Back</a>
+<a class="btn btn-secondary" href="home.php">Back</a>
 <?php
 } else {
 		echo "Not Logged In";
@@ -65,4 +73,7 @@ if (isset($_COOKIE["equine_database"])) {
 		header("Location: http://".$ip."/equine/");
 }
 ?>
+			</div>
+		</div>
+	</div>
 </body>

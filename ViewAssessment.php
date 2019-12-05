@@ -12,6 +12,9 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
 <?php
 if (isset($_COOKIE["equine_database"])) {
 ?>
@@ -44,7 +47,7 @@ if (isset($_COOKIE["equine_database"])) {
 	echo "</table>"
 
 ?>
-<a class="button" href="home.php">Back</a>
+<a class="btn btn-secondary" href="home.php">Back</a>
 <?php
 } else {
 		echo "Not Logged In";
@@ -52,4 +55,7 @@ if (isset($_COOKIE["equine_database"])) {
 		header("Location: http://".$ip."/equine/");
 }
 ?>
+            </div>
+        </div>
+    </div>
 </body>

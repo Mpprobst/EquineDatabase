@@ -12,38 +12,48 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
+			<div class="col-sm-12">
 <?php
 if (isset($_COOKIE["equine_database"])) {
 ?>
-<h1>Search for a User</h1>
-        <form method="post" action="SearchUser.php">
-                <label for="search">Enter a username</label>
-                <input name="search" type="text"  />
-                <button type="submit">Submit</button>
-        </form>
+				<h1>Search for a User</h1>
+				<form method="post" action="SearchUser.php">
+					<div class="form-group">
+						<label for="search">Enter a username</label>
+						<input id="search" name="search" class="form-control" type="text"  />
+					</div>
+					<button class="btn btn-primary" type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
 <?php
         if(isset($_POST["search"])) {
-//              $cookie_array = explode(",", $_COOKIE["equine_database"]);
+	            $cookie_array = explode(",", $_COOKIE["equine_database"]);
                 require("assets/php/mysql_connector.php");
                 $mysqli = mysqli_connect($host, $ROuserName,$ROPass,$DB);
-                $query = "SELECT * FROM User  WHERE User.Name LIKE '". $_POST['search']. "%'";
+                $query = "SELECT * FROM User  WHERE User.Name LIKE '". $_POST['search']. "%' AND User.Clinic = \"". $cookie_array[2] . "\";";
                 $result = $mysqli->query($query);
                 if($result->num_rows > 0) {
-                        echo "<h2>Search Results:</h2>";
-                        echo "<table><thead><tr><th>Username</th><th>Role</th><th>Grant Privileges?</th><th>Revoke Privileges?</th></tr></thead><tbody>";
+                        echo "<h2>Users matching your search in your clinic:</h2>";
+						echo "<table class=\"table table-responsive table-hover\">";
+						echo "<thead><tr><th>Username</th><th>Role</th><th>Grant Privileges?</th><th>Revoke Privileges?</th></tr></thead><tbody>";
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-			echo "<tr><td>".$row['Name']."</td>";
-			echo "<td>".$row['Role']."</td>";
-			echo "<td><a href='admin/php/GrantRoles.php?id=".$row["uid"]."'>Grant Write Permissions</a></td>";
-			echo "<td><a href='admin/php/RevokeRoles.php?id=".$row["uid"]."'>Revoke Write Permissions</a></td></tr>";
+						echo "<tr><td>".$row['Name']."</td>";
+						echo "<td>".$row['Role']."</td>";
+						echo "<td><a href='admin/php/GrantRoles.php?id=".$row["uid"]."'>Grant Write Permissions</a></td>";
+						echo "<td><a href='admin/php/RevokeRoles.php?id=".$row["uid"]."'>Revoke Write Permissions</a></td></tr>";
                 }
                         echo "</tbody></table>";
                 } else {
-                        echo "no results\n";
+                        echo "<p>No Users match your search term within your clinic</p>";
                 }
         }
 ?>
-<a class="button" href="home.php">Back</a>
+				<a class="btn btn-secondary" href="home.php">Back</a>
 <?php
 } else {
         echo "Not Logged In";
@@ -51,5 +61,7 @@ if (isset($_COOKIE["equine_database"])) {
         header("Location: http://".$ip."/equine/");
 }
 ?>
+			</div>
+		</div>
+	</div>
 </body>
-
