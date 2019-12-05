@@ -33,12 +33,19 @@ if (isset($_COOKIE["equine_database"])) {
 	$result = $conn->query($query);
 	$horseName;
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		echo "Name: ".$row["Hname"]."<br />";
+		$death = ($row["Hdod"] == "") ? "Not Applicable" : $row["Hdod"];
+		echo "<h2>Signalment</h2>";
+		echo "<p><strong>Name:</strong> ".$row["Hname"]."</p>";
 		$horseName = $row["Hname"];
-		echo "Date of Birth: ".$row["Hdob"]."<br />";
-		echo "Date of Death or Euthanasia: ".$row["Hdod"]."<br />";
-		echo "Breed: ".$row["Hbreed"]."<br />";
-		echo "Gender: ".$row["Hgender"]."<br />";
+		echo "<p><strong>Rood &amp; Riddle Equine Hospital ID:</strong> ". $row["RREH_Cid"] . "</p>";
+		echo "<p><strong>UK Pathology Case ID:</strong> ". $row["UK_Cid"] ."</p>";
+		echo "<p><strong>Date of Birth:</strong> ".$row["Hdob"]."</p>";
+		echo "<p><strong>Date of Death or Euthanasia:</strong> ".$death."</p>";
+		echo "<p><strong>Breed:</strong> ".$row["Hbreed"]."</p>";
+		echo "<p><strong>Gender:</strong> ".$row["Hgender"]."</p>";
+
+		echo "<h2>Race and Training Data</h2>";
+		echo "<p>TO DO</p>"
 	}
 ?>
 		</div>
