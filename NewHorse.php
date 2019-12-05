@@ -20,7 +20,7 @@ if(isset($_COOKIE["equine_database"])) {
 ?>
 	<h1>Add a Horse to the Database</h1>
 	<form method="post" action="functions/php/InsertHorse.php">
-	<h2>Signalment<h2>
+	<h2>Signalment</h2>
 		<label for="Hname">Horse's name:</label>
 		<input type="text" name="Hname" required />
 <br />		
@@ -68,7 +68,6 @@ if(isset($_COOKIE["equine_database"])) {
 
 		<button type="submit">Submit</button>
 	</form>
-<p>IN PROGRESS</p>
 <?php
 
 	} else {

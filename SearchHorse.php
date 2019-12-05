@@ -12,35 +12,48 @@
 </head>
 
 <body>
+	<div class="container">
 <?php
 if (isset($_COOKIE["equine_database"])) {
 ?>
-<h1>Search for a Horse</h1>
-	<form method="post" action="SearchHorse.php">
-		<label for="search">Enter a horse's name</label>
-		<input name="search" type="text" placeholder="e.g., Secretariat" />
-		<button type="submit">Submit</button>
-	</form>
+		<div class="row">
+			<div class="col-sm-12">
+				<h1>Search for a Horse</h1>
+				<form method="post" action="SearchHorse.php">
+					<div class="form-group">
+						<label for="search">Enter a horse's name or Rood & Riddle case ID</label>
+						<input id="search" class="form-control" name="search" type="text" placeholder="e.g., Secretariat" />		
+					</div>
+					<div class="btn-group" role="group">
+						<button class="btn btn-primary mr-2" type="submit">Search</button>
+						<a class="btn btn-secondary" href="home.php">Back</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
 <?php
 	if(isset($_POST["search"])) {
-//    		$cookie_array = explode(",", $_COOKIE["equine_database"]);
-		require("asssets/php/mysql_connector.php");
-		$mysqli = mysqli_connect($host, $ROuserName,$ROPass,$DB);
-		$query = "SELECT * FROM Horse WHERE Horse.Hname LIKE '". $_POST['search']. "%'";
+		require("assets/php/mysql_connector.php");
+		$mysqli = mysqli_connect($host, $ROuserName, $ROPass,$DB);
+		$query = "SELECT * FROM Horse WHERE Horse.Hname LIKE \"". $_POST["search"]. "%\" OR Horse.RREH_Cid LIKE \"" . $_POST["search"] . "%\"";
 		$result = $mysqli->query($query);
 		if($result->num_rows > 0) {
-			echo "<h2>Search Results:</h2>";
+			echo "<h2>Search Results for <strong>".$_POST["search"]."</strong>:</h2>";
 			echo "<ul>";
 		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-			echo "<li><a href='ViewHorse.php?id=".$row["Hid"]."'>".$row["Hname"]."</a></li>";
+			echo "<li><a href=\"ViewHorse.php?id=".$row["Hid"]."\">".$row["Hname"]."</a></li>";
 		}
 			echo "</ul>";
 		} else {
-			echo "no results";
+			echo "<p>No horses match your search term</p>";
 		}
 	}
 ?>
-<a class="button" href="home.php">Back</a>
+			</div>
+		</div>
+
 <?php
 } else {
 	echo "Not Logged In";
@@ -48,6 +61,7 @@ if (isset($_COOKIE["equine_database"])) {
 	header("Location: http://".$ip."/equine/");
 }
 ?>
+</div>
 </body>
 
 </html>

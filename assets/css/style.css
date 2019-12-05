@@ -2,7 +2,7 @@ body {
 	font-family: Calibri, Arial, sans-serif;
 }
 
-.container {
+/* .container {
 	width: 80%;
 	margin: auto;
 }
@@ -60,7 +60,7 @@ body {
 	display: inline-block;	
 	cursor: pointer;
 	text-decoration: none;
-}
+} */
 .button-list {
 	list-style-type: none;
 }

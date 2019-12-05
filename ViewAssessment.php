@@ -2,7 +2,7 @@
 <html>
 
 <head>
-        <title>Equine Project | View a Horse </title>
+        <title>Equine Project | View an Assessment </title>
         <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">
@@ -15,10 +15,9 @@
 <?php
 if (isset($_COOKIE["equine_database"])) {
 ?>
-<h1>Horse Viewer</h1>
 <?php
-	$hid = $_GET["id"];
-	$query = "SELECT * FROM Horse WHERE Hid = '$hid'";
+	$Cid = $_GET["id"];
+	$query = "SELECT * FROM Assessment WHERE Cid = '$Cid'";
 
 	require("assets/php/mysql_connector.php");
 	$conn= mysqli_connect($host,$ROuserName, $ROPass, $DB);
@@ -26,27 +25,15 @@ if (isset($_COOKIE["equine_database"])) {
 	if(!$conn) {
 		die("Connection failed: ".mysqli_connect_error());
 	}
-
-	$result = $conn->query($query);
-	$horseName;
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		echo "Name: ".$row["Hname"]."<br />";
-		$horseName = $row["Hname"];
-		echo "Date of Birth: ".$row["Hdob"]."<br />";
-		echo "Date of Death or Euthanasia: ".$row["Hdod"]."<br />";
-		echo "Breed: ".$row["Hbreed"]."<br />";
-		echo "Gender: ".$row["Hgender"]."<br />";
-	}
-
-	echo "<h2>Pathology Assessments for " . $horseName . "</h2>";
-	$assessQuery = "SELECT * FROM Assessment INNER JOIN User ON Assessment.Cuser = User.uid WHERE Assessment.Chorse = '$hid'";
+    echo "<h1> .LIMB. Pathology Form </h1>";
+	$assessQuery = "SELECT * FROM Assessment INNER JOIN User ON Assessment.Cuser = User.uid WHERE Assessment.Cid = '$Cid'";
 	$assessments = $conn->query($assessQuery);
 	echo "<table class=\"table table-responsive table-hover\">";
 	echo "<thead><tr><th>Rood &amp; Riddle Case ID</th><th>Clinic</th><th>Assessor</th><th>Limb</th><th>Date</th></tr></thead>";
 	echo "<tbody>";
 	while ($row = mysqli_fetch_array($assessments, MYSQLI_ASSOC)) {
 		echo "<tr>";
-		echo "<td><a href=\"ViewAssessment.php?id=". $row["Cid"] . "\">" . $row["RREH_Cid"] . "</a></td>";
+		echo "<td>" . $row["RREH_Cid"] . "</td>";
 		echo "<td>" . $row["Clinic"] . "</td>";
 		echo "<td>" . $row["Name"] . "</td>";
 		echo "<td>" . $row["Limb"] . "</td>";
