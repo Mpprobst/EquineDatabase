@@ -23,7 +23,7 @@
 
 </style>
 <body>
-<form method="post" action="InsertAssessment.php"> <!-- Note: Sample file name.-->
+<form method="post" action="./functions/php/NewAssessment.php"> <!-- Note: Sample file name.-->
 <!-- Additional Data that needs to be collected for form goes here.  I'll provide one example. -->
 
 	<label for="roodriddle">Rood and Riddle Case Number:</label>
@@ -45,6 +45,7 @@
 		<label> UK Veterinary Diagnostic Case Number:</label>
 		<input type="text" name="UK_CID"/>
 	</div>
+	<input type="hidden" name="Limb" value="Forelimb"/>
 	<h1>Bone Assessement</h1>
 <?php
 /*
@@ -52,8 +53,8 @@
  * loop nested inside to populate the Select with appropriate Options.
  */
 $host = 'localhost';//enter hostname
-$SQLuserName = 'root';//enter user name of DB 
-$Pass = 'Rycbar1234!'; //enter password 
+$SQLuserName = 'debian-sys-maint';//enter user name of DB 
+$Pass = 'ntKxkk9SI6zJjqEF'; //enter password 
 $DB = 'equine'; //Enter database name
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB); // Uses read-only user
 	if (!$mysqli) {
@@ -88,7 +89,7 @@ $limb = forelimb;
    // $mysqli.mysqli_close();
 ?>
 <!-- Finally, we can make the button to submit the form -->
-<button type="submit">Submit</button>
+<button type="submit" onClick="new_assessment($mysqli)" >Submit</button>
 </form>
 
  <script>
