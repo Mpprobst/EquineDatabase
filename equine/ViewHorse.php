@@ -69,7 +69,7 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "</tr>";
 	}
 	echo "</tbody>";
-	echo "</table>"
+	echo "</table>";
 
 ?>
 <a class="btn btn-secondary" href="home.php">Back</a>
