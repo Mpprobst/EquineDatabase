@@ -1,5 +1,0 @@
---------------
-CREATE user 'read-write'@'localhost' identified by 'shakespeare16'
---------------
-
-Bye

@@ -32,7 +32,7 @@ function login($Username,$Password,$mysqli){
 	if($res->num_rows >0){
 		$row= mysqli_fetch_array($res, MYSQLI_ASSOC);
 		$value= $row["Name"].",".$row["Role"].",".$row["Clinic"];
-		setcookie("equine_database", $value, time()+24*60*60, '/');
+		setcookie("equine_database", $value, time()+24*60*60);
 		echo "<h3>".$Username.", You are now logged in</h3>";
 		echo "<table border='1'>";
 		while($row = $res->fetch_assoc())
@@ -45,8 +45,7 @@ function login($Username,$Password,$mysqli){
 			echo "</tr>";
 		}
 		echo "</table>";
-		require("../../assets/php/redirect_helper.php");
-		header( "Location: http://". $ip . "/equine/home.php" );
+		header( "Location: http://172.31.147.164/equine/home.php" );
 		exit ;
 	}
 	else
@@ -67,7 +66,7 @@ $Password = $_POST["password"];
 //$SQLuserName = 'read-write';//enter user name of DB
 //$Pass = 'shakespeare16'; //enter password
 //$DB = 'equine'; //Enter database name
-require("../../assets/php/mysql_connector.php");
+require("./assets/php/mysql_connector.php");
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
 
 // Check for connection error
