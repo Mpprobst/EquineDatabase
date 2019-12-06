@@ -2,8 +2,8 @@
 <html>
 
 <head>
-        <title>Equine Project | View a Horse </title>
-        <meta charset="UTF-8" />
+	<title>Equine Project | View a Horse </title>
+	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">
 	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
@@ -45,7 +45,12 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "<p><strong>Gender:</strong> ".$row["Hgender"]."</p>";
 
 		echo "<h2>Race and Training Data</h2>";
-		echo "<p>TO DO</p>";
+		$raceTraining = ($row["RaceTraining"] == 1) ? "Yes" : "No";
+		$raceExternal = ($row["RaceExternal"] == 1) ? "Yes" : "No";
+		$raceStartAge = ($row["RaceStartAge"] == "") ? "Not Applicable" : $row["RaceStartAge"];
+		echo "<p><strong>Horse in Race Training?:</strong> ".$raceTraining."</p>";
+		echo "<p><strong>Horse raced outside North America:</strong> ".$raceExternal."</p>";
+		echo "<p><strong>Age of horse at first race start:</strong> ".$raceStartAge." days old</p>";
 	}
 ?>
 		</div>
@@ -71,20 +76,33 @@ if (isset($_COOKIE["equine_database"])) {
 	echo "</tbody>";
 	echo "</table>";
 
+	$cookie_array = explode(",", $_COOKIE["equine_database"]);
+
 	echo "<div class=\"btn-group\" role=\"group\">";
+	if ($cookie_array[1] == "read-write"){
+		// New Forelimb Assessment Button
+		echo "<form method=\"post\" action=\"NewAssessment.php\">";
+		echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
+		echo "<input type=\"hidden\" name=\"Limb\" value=\"Forelimb\" />";
+		echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Forelimb Assessment</button>";
+		echo "</form>";
 	
-	echo "<form method=\"post\" action=\"NewAssessment.php\">";
-	echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
-	echo "<input type=\"hidden\" name=\"Limb\" value=\"Forelimb\" />";
-	echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Forelimb Assessment</button>";
-	echo "</form>";
+		// New Hindlimb Assessment Button
+		echo "<form method=\"post\" action=\"NewAssessment.php\">";
+		echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
+		echo "<input type=\"hidden\" name=\"Limb\" value=\"Hindlimb\" />";
+		echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Hindlimb Assessment</button>";
+		echo "</form>";
 
-	echo "<form method=\"post\" action=\"NewAssessment.php\">";
-	echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
-	echo "<input type=\"hidden\" name=\"Limb\" value=\"Hindlimb\" />";
-	echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Hindlimb Assessment</button>";
-	echo "</form>";
+		// Add additional layer of if statement for checking clinic?
 
+		// Edit this Horse Button
+		echo "<form method=\"post\" action=\"EditHorse.php\">";
+		echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
+		// other data needed for edit horse clinical data?
+		echo "<button type=\"submit\" class=\"btn btn-default mr-2\">Edit Clinical Data</button>";
+		echo "</form>";
+	}
 	
 	echo "<a class=\"btn btn-secondary\" href=\"home.php\">Back</a>";
 	echo "</div>";
