@@ -45,7 +45,7 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "<p><strong>Gender:</strong> ".$row["Hgender"]."</p>";
 
 		echo "<h2>Race and Training Data</h2>";
-		echo "<p>TO DO</p>"
+		echo "<p>TO DO</p>";
 	}
 ?>
 		</div>
@@ -69,7 +69,7 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "</tr>";
 	}
 	echo "</tbody>";
-	echo "</table>"
+	echo "</table>";
 
 ?>
 <a class="btn btn-secondary" href="home.php">Back</a>
