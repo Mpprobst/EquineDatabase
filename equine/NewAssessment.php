@@ -54,10 +54,7 @@
  * This function contains an initial loop to read in all appropriate PathologySites with another 
  * loop nested inside to populate the Select with appropriate Options.
  */
-$host = 'localhost';//enter hostname
-$SQLuserName = 'debian-sys-maint';//enter user name of DB 
-$Pass = 'ntKxkk9SI6zJjqEF'; //enter password 
-$DB = 'equine'; //Enter database name
+require("assets/php/mysql_connector.php");
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB); // Uses read-only user
 	if (!$mysqli) {
 			 echo "Could not connect to database \n";
