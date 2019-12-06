@@ -2,12 +2,12 @@
 	Project members: Darren Powers, Jake Hayden, Nicholas Poe, and Michael Probst
 */
 
-CREATE DATABASE equine; -- Create the equine database.  Uncomment this line to use.
+CREATE DATABASE IF NOT EXISTS equine; -- Create the equine database.  Uncomment this line to use.
 
 USE equine;
 
 -- Create Users Table
-CREATE TABLE User(uid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, Name TEXT(15) NOT NULL, Pass TEXT NOT NULL, Clinic TEXT, Role TEXT);
+CREATE TABLE IF NOT EXISTS User(uid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, Name TEXT(15) NOT NULL, Pass TEXT NOT NULL, Clinic TEXT, Role TEXT);
 
 -- Populate Users Table with 'Default Clinic' users.
 INSERT INTO User VALUES (NULL, 'Admin', 'admin', 'default-clinic', 'read-write'), 
@@ -15,7 +15,7 @@ INSERT INTO User VALUES (NULL, 'Admin', 'admin', 'default-clinic', 'read-write')
         (NULL, 'cs405', 'cs405', 'default-clinic', 'read-write');
 
 -- Create Horse Table
-CREATE TABLE Horse (
+CREATE TABLE IF NOT EXISTS Horse (
         Hid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         Hname TEXT NOT NULL, 
         Hdob DATE NOT NULL,
@@ -36,7 +36,7 @@ INSERT INTO Horse VALUES (NULL, 'Pony', '1999-11-11', NULL, 'thoroughbred', 'fem
 
 -- PathologySite table creation and population. Pathology Site is the physical location being assessed on a form.
 
-CREATE TABLE PathologySite (
+CREATE TABLE IF NOT EXISTS PathologySite (
         Sid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         Limb TEXT,
         Bone TEXT,
@@ -252,7 +252,7 @@ INSERT INTO PathologySite Values (NULL, 'Forelimb', 'Intermediate Carpal', NULL,
 
 -- Create Pathology table. Pathologies are the specific options selectable for each Site in an assessment.
 
-CREATE TABLE Pathology (
+CREATE TABLE IF NOT EXISTS Pathology (
         Pid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         Pname TEXT
         );
@@ -281,7 +281,7 @@ INSERT INTO Pathology VALUES (NULL, 'Bone Fragment');
 
 -- Create PathologyAtSite Table. This table holds records connecting a site to the pathologies available to the site.
 
-CREATE TABLE PathologyAtSite (
+CREATE TABLE IF NOT EXISTS PathologyAtSite (
         Pid INT NOT NULL,
         Sid INT NOT NULL,
         PRIMARY KEY(Pid, Sid),
@@ -1526,7 +1526,7 @@ INSERT INTO PathologyAtSite VALUES (1, 33), -- not assessed
 
 -- Create Assessment Table. This is the root element for the forms containing basic data and an identifier used for the CasePathology table.
 
-CREATE TABLE Assessment (
+CREATE TABLE IF NOT EXISTS Assessment (
         Cid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         Chorse INT NOT NULL,
         Cuser INT NOT NULL,
@@ -1548,7 +1548,7 @@ CREATE TABLE Assessment (
 
 -- Create CasePathology table. This table holds the specific pathology selectiosn for each site tied to a specific assessment (case)
 
-CREATE TABLE CasePathology (
+CREATE TABLE IF NOT EXISTS CasePathology (
         Cid INT NOT NULL,
         Sid INT NOT NULL,
         Pid INT NOT NULL,

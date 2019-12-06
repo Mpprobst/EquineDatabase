@@ -26,7 +26,7 @@
 <form method="post" action="./functions/php/NewAssessment.php"> <!-- Note: Sample file name.-->
 <!-- Additional Data that needs to be collected for form goes here.  I'll provide one example. -->
 	<label class = "roodriddle">Horse Name</label>
-	<input type="text" name=HorseName" id="HorseName"/>
+	<input type="text" name="HorseName" id="HorseName"/>
 
 	<label for="roodriddle">Rood and Riddle Case Number:</label>
 	<input type="text" name="RREH_CID" id="RoodRiddle" />

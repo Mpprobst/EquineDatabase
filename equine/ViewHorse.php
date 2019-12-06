@@ -71,9 +71,24 @@ if (isset($_COOKIE["equine_database"])) {
 	echo "</tbody>";
 	echo "</table>";
 
-?>
-<a class="btn btn-secondary" href="home.php">Back</a>
-<?php
+	echo "<div class=\"btn-group\" role=\"group\">";
+	
+	echo "<form method=\"post\" action=\"NewAssessment.php\">";
+	echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
+	echo "<input type=\"hidden\" name=\"Limb\" value=\"Forelimb\" />";
+	echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Forelimb Assessment</button>";
+	echo "</form>";
+
+	echo "<form method=\"post\" action=\"NewAssessment.php\">";
+	echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
+	echo "<input type=\"hidden\" name=\"Limb\" value=\"Hindlimb\" />";
+	echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Hindlimb Assessment</button>";
+	echo "</form>";
+
+	
+	echo "<a class=\"btn btn-secondary\" href=\"home.php\">Back</a>";
+	echo "</div>";
+
 } else {
 		echo "Not Logged In";
 		require("assets/php/redirect_helper.php");
