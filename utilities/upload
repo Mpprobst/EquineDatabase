@@ -6,4 +6,4 @@ if test -e "$SITE"; then
 	sudo rm -r $SITE
   sudo mkdir $SITE
 fi
-sudo cp ../equine/* #copy all files from equine folder to the site folder
+sudo cp -r ../equine/* $SITE #copy all files from equine folder to the site folder
