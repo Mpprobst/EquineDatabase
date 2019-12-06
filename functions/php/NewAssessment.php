@@ -18,6 +18,19 @@ function new_assessment() {
 	// get the auto_incremented number from that assessmet and set $cid to that ***lookk at InsertHorse.php***
 	// returns result set that contains the numerical value of the last auto increment number
 	// make sure that cid is in scope when running the foreleg portion of the assessment
+	$HorseName = $_POST["HorseName"];
+
+	$horse_query = "SELECT Hid FROM Horse WHERE Hname = " . $HorseName . ";";
+	echo "horse query = " . $horse_query . "<br>"; 
+	$HorseId = $mysqli->query($horse_query);
+	echo "query result = " . $HorseId . "<br>";
+
+	$RREH_Cid = $_POST["RREH_CID"];
+	$side = $_POST["SideAssessed"];
+	$phantom = $_POST["Phantom"];
+	$euthanized = $_POST["Euthanized?"];
+	$euthanization_date = $_POST["euthanasiaDate"];
+	$UK_Cid = $_POST["UK_CID"];
 	
 	$sql = "INSERT INTO CasePathology VALUES ";
 	// Gets all sites for the selected Limb
