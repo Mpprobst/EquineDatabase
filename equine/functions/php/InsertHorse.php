@@ -1,4 +1,5 @@
 <?php
+require("../../assets/php/redirect_helper.php");
 if (isset($_COOKIE["equine_database"]))
 {
     // Generate Insert Query from Post Data
@@ -28,7 +29,7 @@ if (isset($_COOKIE["equine_database"]))
         $res = $mysqli->query($idquery);
         
         while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-            require("../../assets/php/redirect_helper.php");
+            
             header("Location: http://" . $ip . "/equine/ViewHorse.php?id=" . $row["LAST_INSERT_ID()"]);
         }
     } else {
@@ -41,5 +42,6 @@ else
 {
     // Redirect to Login, not logged in
     echo "Not logged in";
+    header("Location: http://" . $ip . "/equine/index.php");
 }
 ?>

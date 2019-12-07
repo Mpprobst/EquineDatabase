@@ -100,7 +100,7 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "<form method=\"post\" action=\"EditHorse.php\">";
 		echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
 		// other data needed for edit horse clinical data?
-		echo "<button type=\"submit\" class=\"btn btn-default mr-2\">Edit Clinical Data</button>";
+		echo "<button type=\"submit\" class=\"btn btn-light mr-2\">Edit Clinical Data</button>";
 		echo "</form>";
 	}
 	

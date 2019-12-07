@@ -33,7 +33,8 @@ if (isset($_COOKIE["equine_database"])) {
 	$result = $conn->query($query);
 	$horseName;
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		echo "<form method=\"POST\" action=\"functions/php/UpdateHorse.php\">";
+        echo "<form method=\"POST\" action=\"functions/php/UpdateHorse.php\">";
+        echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
         echo "<h2>Signalment</h2>";
         echo "<div class=\"form-group\">";
         echo "<label for=\"Hname\">Name</label>";
@@ -43,7 +44,7 @@ if (isset($_COOKIE["equine_database"])) {
         echo "<label for=\"RREH_Cid\">Rood &amp; Riddle Equine Hospital Case ID</label>";
         echo "<input type=\"text\" class=\"form-control\" id=\"RREH_Cid\" name=\"RREH_Cid\" value=\"".$row["RREH_Cid"]."\" readonly />";
         echo "<label for=\"UK_Cid\">UK Pathology Case Id</label>";
-        echo "<input type=\"text\" class=\"form-control\" id=\"UK_Cid\" name=\"UK_Cid\" value=\"".$row["UK_Cid"]."\" readonly />";
+        echo "<input type=\"text\" class=\"form-control\" id=\"UK_Cid\" name=\"UK_Cid\" value=\"".$row["UK_Cid"]."\" />";
         echo "</div>";
         echo "<div class=\"form-group\">";
         echo "<label for=\"Hdob\">Date of Birth</label>";
@@ -51,9 +52,19 @@ if (isset($_COOKIE["equine_database"])) {
         echo "<label for=\"Hdod\">Date of Death or Euthanasia</label>";
         echo "<input type=\"date\" class=\"form-control\" id=\"Hdod\" name=\"Hdod\" value=\"".$row["Hdod"]."\" />";
         echo "<label for=\"Hbreed\">Breed</label>";
-        echo "<input type=\"text\" class=\"form-control\" id=\"Hbreed\" name=\"Hbreed\" value=\"".$row["Hbreed"]."\" />";
+        echo "<select name=\"Hbreed\" class=\"form-control\" id=\"Hbreed\" required>";
+        echo "<option value=\"thoroughbred\"".(($row["Hbreed"] == "thoroughbred") ? "Selected" : "").">Thoroughbred</option>";
+        echo "<option value=\"standardbred\"".(($row["Hbreed"] == "standardbred") ? "Selected" : "").">Standardbred</option>";
+        echo "<option value=\"sprintbred\"".(($row["Hbreed"] == "sprintbred") ? "Selected" : "").">Sprint bred (Quarter Horse, Paint, or Appaloosa)</option>";
+        echo "<option value=\"arabian\"".(($row["Hbreed"] == "arabian") ? "Selected" : "").">Arabian</option>";
+        echo "</select>";
         echo "<label for=\"Hgender\">Gender</label>";
-        echo "<input type=\"text\" class=\"form-control\" id=\"Hgender\" name=\"Hgender\" value=\"".$row["Hgender"]."\" />";
+        echo "<select name=\"Hgender\" id=\"Hgender\" class=\"form-control\" required>";
+        echo "<option value=\"intact-male\"".(($row["Hgender"] == "intact-male") ? "Selected" : "").">Intact male</option>";
+        echo "<option value=\"gelding\"".(($row["Hgender"] == "gelding") ? "Selected" : "").">Gelding</option>";
+        echo "<option value=\"female\"".(($row["Hgender"] == "female") ? "Selected" : "").">Female</option>";
+        echo "<option value=\"spayed-female\"".(($row["Hgender"] == "spayed-female") ? "Selected" : "").">Spayed female</option>";
+        echo "</select>";
         echo "</div>";
         echo "<h2>Race and Training Data</h2>";
         echo "<div class=\"form-group\">";
@@ -79,7 +90,7 @@ if (isset($_COOKIE["equine_database"])) {
 		<div class="col-sm-12">
 <?php
     echo "<div class=\"btn-group\" role=\"group\">";
-    echo "<a class=\"btn btn-danger\" href=\"ViewHorse.php?id=".$_POST["Hid"]."\">Cancel</a>";
+    echo "<a class=\"btn btn-danger mr-2\" href=\"ViewHorse.php?id=".$_POST["Hid"]."\">Cancel</a>";
 	echo "<a class=\"btn btn-secondary\" href=\"home.php\">Home</a>";
 	echo "</div>";
 
