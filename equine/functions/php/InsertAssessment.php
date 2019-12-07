@@ -1,10 +1,8 @@
 <?php 
-
+echo "hello<br>";
 // This file will insert Assessment queries into the database
-function new_assessment() {
 if (isset($_COOKIE["equine_database"]))
 {	
-
 	$cookie_array = explode(",", $_COOKIE["equine_database"]);
 	$user = $cookie_array[0];
 	$uid_query = "SELECT uid FROM User WHERE Name = \"" . $user . "\";";
@@ -59,7 +57,4 @@ if (isset($_COOKIE["equine_database"]))
 	$sql .= ";";
 	echo $sql;
 }
-}
-
-new_assessment($mysqli);
 ?>
