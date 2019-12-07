@@ -81,6 +81,7 @@ if (isset($_COOKIE["equine_database"])) {
         echo "<label for=\"RaceStartAge\">Age at first race start (in days). If this Horse has never raced, leave blank</label>";
         echo "<input type=\"text\" name=\"RaceStartAge\" id=\"RaceStartAge\" class=\"form-control\" value=\"".$row["RaceStartAge"]."\" />";
         echo "</div>";
+        echo "<button type=\"submit\" class=\"btn btn-primary\">Save Changes</button>";
         echo "</form>";
 	}
 ?>
