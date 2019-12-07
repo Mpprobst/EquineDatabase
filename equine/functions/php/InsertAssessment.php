@@ -4,32 +4,21 @@
 function new_assessment() {
 if (isset($_COOKIE["equine_database"]))
 {	
-	require("../../assets/php/mysql_connector.php");
-        $mysqli = new mysqli($host, $SQLuserName, $Pass, $DB);
 
-	if ($mysqli->connect_error) {
-        	die("Connection failed: " . $mysqli->connect_error);
-	}
 	$cookie_array = explode(",", $_COOKIE["equine_database"]);
 	$user = $cookie_array[0];
 	$uid_query = "SELECT uid FROM User WHERE Name = \"" . $user . "\";";
 	$uid_result = $mysqli->query($uid_query);
 	$uid_row = mysqli_fetch_array($uid_result, MYSQLI_ASSOC);
 	$user_id = $uid_row["uid"];
-	
+	 
 	$horse_id = $_POST["HorseID"];
 	echo "Hid = " . $horse_id . "<br>";
 	$horse_id = 1;	// delete this when running for real
 	$side = $_POST["SideAssessed"];
 	$phantom = $_POST["Phantom"];
-	if ($phantom)
-	{
-		$phantom = 1;
-	}
-	else
-	{
-		$phantom = 0;
-	}
+	if ($phantom) {$phantom = 1;}
+	else {$phantom = 0;}
 	$euthanized = $_POST["Euthanized?"];
 	$euthanization_date = "NULL";
 	$UK_Cid = "NULL";
@@ -40,10 +29,19 @@ if (isset($_COOKIE["equine_database"]))
 		$UK_Cid = $_POST["UK_CID"];	
 	}
 	$date = "'" .  $_POST["Date"] . "'";
-	$sql_assessment = "INSERT INTO Assessment VALUES (" . "NULL" . ", " . $horse_id . ", " . $user_id . ", " . $date . ", " . $UK_Cid . ", " . $RREH_Cid . ", \"" .  $_POST["Limb"] . "\", " . $phantom . ");";
+
+	require("../../assets/php/mysql_connector.php");
+        $mysqli = new mysqli($host, $SQLuserName, $Pass, $DB);
+
+	if ($mysqli->connect_error) {
+        	die("Connection failed: " . $mysqli->connect_error);
+	}
+
+	//$sql_assessment = "INSERT INTO Assessment VALUES (" . "NULL" . ", " . $horse_id . ", " . $user_id . ", " . $date . ", " . $UK_Cid . ", " . $RREH_Cid . ", \"" .  $_POST["Limb"] . "\", " . $phantom . ");";
 
 	echo "Assessment query = " . $sql_assessment . "<br>";
-	$iresult_assessment = $mysqli->query($sql_assessment);
+	
+	$result_assessment = $mysqli->query($sql_assessment);
 	$cid = $mysqli_insert_id($result_assessment);
 	//Gets all sites for the selected Limb
 	$query = "SELECT Sid FROM PathologySite WHERE Limb = \"" . $_POST["Limb"] . "\";";
