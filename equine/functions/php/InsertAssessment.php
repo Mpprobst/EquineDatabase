@@ -1,10 +1,5 @@
 <?php 
 
-$b = $_POST["1"];
-echo "\n1: ". $b . "<br>";
-$cid = 1;
-
-// if is set cookie ***look at inserthorse.php
 // This file will insert Assessment queries into the database
 function new_assessment() {
 if (isset($_COOKIE["equine_database"]))
@@ -48,18 +43,18 @@ if (isset($_COOKIE["equine_database"]))
 		$ehuthanization_date = $_POST["euthanasiaDate"];
 		$UK_Cid = $_POST["UK_CID"];	
 	}
-	//$time = "'2019-12-6'";
 	$date = $_POST["Date"];
-	$sql = "INSERT INTO Assessment VALUES (" . $cid . ", " . $horse_id . ", " . $user_id . ", " . $date . ", " . $UK_Cid . ", " . $RREH_Cid . ", \"" .  $_POST["Limb"] . "\", " . $phantom . ");";
+	$sql_assessment = "INSERT INTO Assessment VALUES (" . "NULL" . ", " . $horse_id . ", " . $user_id . ", " . $date . ", " . $UK_Cid . ", " . $RREH_Cid . ", \"" .  $_POST["Limb"] . "\", " . $phantom . ");";
 
-	echo "Assessment query = " . $sql . "<br>";
-	// Gets all sites for the selected Limb
+	echo "Assessment query = " . $sql_assessment . "<br>";
+	$result_assessment = $mysqli->query($sql_assessment);
+	$cid = $mysqli_insert_id($result_assessment);
+	//Gets all sites for the selected Limb
 	$query = "SELECT Sid FROM PathologySite WHERE Limb = \"" . $_POST["Limb"] . "\";";
 	echo "Query: ". $query . "<br>";
 
-	$result = $mysqli->query($query);
-	$cid = 1;
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+	$result_site = $mysqli->query($query);
+	while($row = mysqli_fetch_array($result_site, MYSQLI_ASSOC)) {
 		$sid = $row["Sid"];
 		echo "sid: " . $sid;
 		$pid = $_POST[(string) $sid];
