@@ -16,14 +16,10 @@ if (isset($_COOKIE["equine_database"]))
 	$uid_result = $mysqli->query($uid_query);
 	$uid_row = mysqli_fetch_array($uid_result, MYSQLI_ASSOC);
 	$user_id = $uid_row["uid"];
-	// create the insert into asessment with the post data from the static portions of the form (POST) before the case pathology nonsense
-	// HorseID, RREH_Cid, etc.
-	// get the auto_incremented number from that assessmet and set $cid to that ***lookk at InsertHorse.php***
-	// returns result set that contains the numerical value of the last auto increment number
-	// make sure that cid is in scope when running the foreleg portion of the assessment
+	
 	$horse_id = $_POST["HorseID"];
 	echo "Hid = " . $horse_id . "<br>";
-
+	$horse_id = 1;	// delete this when running for real
 	$side = $_POST["SideAssessed"];
 	$phantom = $_POST["Phantom"];
 	if ($phantom)
@@ -43,11 +39,11 @@ if (isset($_COOKIE["equine_database"]))
 		$ehuthanization_date = $_POST["euthanasiaDate"];
 		$UK_Cid = $_POST["UK_CID"];	
 	}
-	$date = $_POST["Date"];
+	$date = "'" .  $_POST["Date"] . "'";
 	$sql_assessment = "INSERT INTO Assessment VALUES (" . "NULL" . ", " . $horse_id . ", " . $user_id . ", " . $date . ", " . $UK_Cid . ", " . $RREH_Cid . ", \"" .  $_POST["Limb"] . "\", " . $phantom . ");";
 
 	echo "Assessment query = " . $sql_assessment . "<br>";
-	$result_assessment = $mysqli->query($sql_assessment);
+	$iresult_assessment = $mysqli->query($sql_assessment);
 	$cid = $mysqli_insert_id($result_assessment);
 	//Gets all sites for the selected Limb
 	$query = "SELECT Sid FROM PathologySite WHERE Limb = \"" . $_POST["Limb"] . "\";";
