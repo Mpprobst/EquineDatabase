@@ -13,9 +13,9 @@ if (isset($_COOKIE["equine_database"]))
     $query .= "Hgender = \"" . $_POST["Hgender"] . "\", ";
     $query .= "UK_Cid = \"" . $_POST["UK_Cid"] . "\", ";
     $query .= "RREH_Cid = \"" . $_POST["RREH_Cid"] . "\", ";
-    $query .= "RaceTraining = \"" . $_POST["RaceTraining"] . "\", ";
-    $query .= "RaceExternal = \"" . $_POST["RaceExternal"] . "\", ";
-    $query .= "RaceStartAge = \"" . $_POST["RaceStartAge"] . "\" ";
+    $query .= "RaceTraining = " . strtoupper($_POST["RaceTraining"]) . ", ";
+    $query .= "RaceExternal = " . strotoupper($_POST["RaceExternal"]) . ", ";
+    $query .= "RaceStartAge = " . $_POST["RaceStartAge"] . " ";
     $query .= "WHERE Hid=\"".$_POST["Hid"]."\";";
 
     require("../../assets/php/mysql_connector.php");
