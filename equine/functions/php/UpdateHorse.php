@@ -6,7 +6,9 @@ if (isset($_COOKIE["equine_database"]))
     $query =  "UPDATE Horse SET ";
     $query .= "Hname = \"" . $_POST["Hname"] . "\", ";
     $query .= "Hdob = \"" . $_POST["Hdob"] . "\", ";
-    $query .= "Hdod = \"" . $_POST["Hdod"] . "\", ";
+    if ($_POST["Hdod"] != ""){
+        $query .= "Hdod = \"" . $_POST["Hdod"] . "\", ";
+    }
     $query .= "Hbreed = \"" . $_POST["Hbreed"] . "\", ";
     $query .= "Hgender = \"" . $_POST["Hgender"] . "\", ";
     $query .= "UK_Cid = \"" . $_POST["UK_Cid"] . "\", ";
