@@ -12,6 +12,9 @@
 </head>
 
 <body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
 <?php
 require("assets/php/redirect_helper.php");
 if(isset($_COOKIE["equine_database"])) {
@@ -66,9 +69,9 @@ if(isset($_COOKIE["equine_database"])) {
 			<label for="RaceStartAge">Age at first race start (in days). If this Horse has never raced, leave blank</label>
 			<input type="text" name="RaceStartAge" id="RaceStartAge" class="form-control"/>
 		</div>
-		<div class="btn-group">
+		<div class="btn-group" role="group">
 			<button type="submit" class="btn btn-primary mr-2">Submit</button>
-			<a class="btn btn-secondary" href="home.php">Cancel &amp; Home</button>
+			<a class="btn btn-secondary" href="home.php">Cancel &amp; Home</a>
 		</div>
 	</form>
 <?php
@@ -79,39 +82,11 @@ if(isset($_COOKIE["equine_database"])) {
 	}
 } else {
 	echo "Not logged in";
-	header("Location: http://".$ip."/equine/");
-}
-
-if(isset($_POST["Hname"])) {
-	require("./assets/php/mysql_connector.php");
-	$conn= mysqli_connect($host,$SQLuserName,$Pass,$DB);
-
-	$hname = $_POST["Hname"];
-	$hdob = $_POST["Hdob"];
-	$hdod = empty($_POST["Hdod"]) ? NULL : $_POST["Hdod"];
-	$hbreed = $_POST["Hbreed"];
-	$hgender = $_POST["Hgender"];
-	$checkQuery="SELECT * FROM Horse WHERE (Hname LIKE '$hname') AND (Hdob LIKE '$hdob')";
-
-	if(empty($hdod)) {
-		$insertQuery="INSERT INTO Horse (Hname, Hdob, Hbreed, Hgender) VALUES('$hname', '$hdob', '$hbreed', '$hgender')";
-	} else {
-		$insertQuery="INSERT INTO Horse (Hname, Hdob, Hdod, Hbreed, Hgender) VALUES('$hname', '$hdob', IFNULL($hdod, NULL), '$hbreed', '$hgender')";
-	}
-
-	if(!$conn) {
-		die("Connection failed: ".mysqli_connect_error());
-	}
-	$check = $conn->query($checkQuery);
-	if ($check->num_rows >0) {
-		echo "ERROR: Horse already exists";
-	} else {
-		if($conn->query($query)){
-			echo "Horse Added Successfully!";
-		}		
-	}
+	header("Location: http://".$ip."/equine/indexphp");
 }
 ?>
-<a class="button" href="home.php">Back</a>
+			</div>
+		</div>
+	</div>
 </body>
 <html>
