@@ -7,32 +7,52 @@ $cid = 1;
 // if is set cookie ***look at inserthorse.php
 // This file will insert Assessment queries into the database
 function new_assessment() {
+if (isset($_COOKIE["equine_database"]))
+{	
 	require("../../assets/php/mysql_connector.php");
         $mysqli = new mysqli($host, $SQLuserName, $Pass, $DB);
 
 	if ($mysqli->connect_error) {
         	die("Connection failed: " . $mysqli->connect_error);
 	}
+	$cookie_array = explode(",", $_COOKIE["equine_database"]);
+	$user = $cookie_array[0];
+	$uid_query = "SELECT uid FROM User WHERE Name = \"" . $user . "\";";
+	$uid_result = $mysqli->query($uid_query);
+	$uid_row = mysqli_fetch_array($uid_result, MYSQLI_ASSOC);
+	$user_id = $uid_row["uid"];
 	// create the insert into asessment with the post data from the static portions of the form (POST) before the case pathology nonsense
 	// HorseID, RREH_Cid, etc.
 	// get the auto_incremented number from that assessmet and set $cid to that ***lookk at InsertHorse.php***
 	// returns result set that contains the numerical value of the last auto increment number
 	// make sure that cid is in scope when running the foreleg portion of the assessment
-	$HorseName = $_POST["HorseName"];
+	$horse_id = $_POST["HorseID"];
+	echo "Hid = " . $horse_id . "<br>";
 
-	$horse_query = "SELECT Hid FROM Horse WHERE Hname = " . $HorseName . ";";
-	echo "horse query = " . $horse_query . "<br>"; 
-	$HorseId = $mysqli->query($horse_query);
-	echo "query result = " . $HorseId . "<br>";
-
-	$RREH_Cid = $_POST["RREH_CID"];
 	$side = $_POST["SideAssessed"];
 	$phantom = $_POST["Phantom"];
+	if ($phantom)
+	{
+		$phantom = 1;
+	}
+	else
+	{
+		$phantom = 0;
+	}
 	$euthanized = $_POST["Euthanized?"];
-	$euthanization_date = $_POST["euthanasiaDate"];
-	$UK_Cid = $_POST["UK_CID"];
-	
-	$sql = "INSERT INTO CasePathology VALUES ";
+	$euthanization_date = "NULL";
+	$UK_Cid = "NULL";
+	$RREH_Cid = $_POST["RREH_CID"];
+	if ($euthanized)
+	{
+		$ehuthanization_date = $_POST["euthanasiaDate"];
+		$UK_Cid = $_POST["UK_CID"];	
+	}
+	//$time = "'2019-12-6'";
+	$date = $_POST["Date"];
+	$sql = "INSERT INTO Assessment VALUES (" . $cid . ", " . $horse_id . ", " . $user_id . ", " . $date . ", " . $UK_Cid . ", " . $RREH_Cid . ", \"" .  $_POST["Limb"] . "\", " . $phantom . ");";
+
+	echo "Assessment query = " . $sql . "<br>";
 	// Gets all sites for the selected Limb
 	$query = "SELECT Sid FROM PathologySite WHERE Limb = \"" . $_POST["Limb"] . "\";";
 	echo "Query: ". $query . "<br>";
@@ -49,6 +69,7 @@ function new_assessment() {
 	$sql = substr($sql, 0, -1);
 	$sql .= ";";
 	echo $sql;
+}
 }
 
 new_assessment($mysqli);
