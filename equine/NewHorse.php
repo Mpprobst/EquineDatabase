@@ -30,9 +30,9 @@ if(isset($_COOKIE["equine_database"])) {
 		</div>
 		<div class="form-group">
 			<label for="RREH_Cid">Rood &amp; Riddle Equine Hospital Case ID</label>
-			<input type="text" class="form-control" id="RREH_Cid" name="RREH_Cid" readonly />
+			<input type="text" class="form-control" id="RREH_Cid" name="RREH_Cid"  />
 			<label for="UK_Cid">UK Pathology Case Id</label>
-			<input type="text" class="form-control" id="UK_Cid" name="UK_Cid"  readonly />
+			<input type="text" class="form-control" id="UK_Cid" name="UK_Cid" />
 		</div>
 		<div class="form-group">
 			<label for="Hdob">Date of Birth</label>
