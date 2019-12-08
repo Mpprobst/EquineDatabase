@@ -81,19 +81,16 @@ if (isset($_COOKIE["equine_database"])) {
         echo "<label for=\"RaceStartAge\">Age at first race start (in days). If this Horse has never raced, leave blank</label>";
         echo "<input type=\"text\" name=\"RaceStartAge\" id=\"RaceStartAge\" class=\"form-control\" value=\"".$row["RaceStartAge"]."\" />";
         echo "</div>";
-        echo "<button type=\"submit\" class=\"btn btn-primary\">Save Changes</button>";
+        echo "<div class=\"btn-group\" role=\"group\">";
+        echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">Save Changes</button>";
+        echo "<a class=\"btn btn-danger mr-2\" href=\"ViewHorse.php?id=".$_POST["Hid"]."\">Cancel</a>";
+        echo "<a class=\"btn btn-secondary\" href=\"home.php\">Home</a>";
+        echo "</div>";
         echo "</form>";
 	}
-?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-<?php
-    echo "<div class=\"btn-group\" role=\"group\">";
-    echo "<a class=\"btn btn-danger mr-2\" href=\"ViewHorse.php?id=".$_POST["Hid"]."\">Cancel</a>";
-	echo "<a class=\"btn btn-secondary\" href=\"home.php\">Home</a>";
-	echo "</div>";
+
+
+
 
 } else {
 		echo "Not Logged In";
