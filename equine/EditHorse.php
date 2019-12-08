@@ -38,11 +38,11 @@ if (isset($_COOKIE["equine_database"])) {
         echo "<h2>Signalment</h2>";
         echo "<div class=\"form-group\">";
         echo "<label for=\"Hname\">Name</label>";
-        echo "<input type=\"text\" class=\"form-control\" id=\"Hname\" name=\"Hname\" value=\"". $row["Hname"]."\" />";
+        echo "<input type=\"text\" class=\"form-control\" id=\"Hname\" name=\"Hname\" value=\"". $row["Hname"]."\" required />";
         echo "</div>";
         echo "<div class=\"form-group\">";
         echo "<label for=\"RREH_Cid\">Rood &amp; Riddle Equine Hospital Case ID</label>";
-        echo "<input type=\"text\" class=\"form-control\" id=\"RREH_Cid\" name=\"RREH_Cid\" value=\"".$row["RREH_Cid"]."\" readonly />";
+        echo "<input type=\"text\" class=\"form-control\" id=\"RREH_Cid\" name=\"RREH_Cid\" value=\"".$row["RREH_Cid"]."\" required />";
         echo "<label for=\"UK_Cid\">UK Pathology Case Id</label>";
         echo "<input type=\"text\" class=\"form-control\" id=\"UK_Cid\" name=\"UK_Cid\" value=\"".$row["UK_Cid"]."\" />";
         echo "</div>";
