@@ -23,10 +23,8 @@
 
 </style>
 <body>
-<form method="post" action="./functions/php/InsertAssessment.php"> <!-- Note: Sample file name.-->
+<form method="post" action="InsertAssessment.php"> <!-- Note: Sample file name.-->
 <!-- Additional Data that needs to be collected for form goes here.  I'll provide one example. -->
-	<input type="hidden" name="HorseID" id="Hid" value=$_POST["Hid"]/>
-	<input type="hidden" type='date' name="Date" id='hasta' value='<?php echo date('Y-m-d');?>'/>
 
 	<label for="roodriddle">Rood and Riddle Case Number:</label>
 	<input type="text" name="RREH_CID" id="RoodRiddle" />
@@ -47,14 +45,16 @@
 		<label> UK Veterinary Diagnostic Case Number:</label>
 		<input type="text" name="UK_CID"/>
 	</div>
-	<input type="hidden" name="Limb" value="Forelimb"/>
 	<h1>Bone Assessement</h1>
 <?php
 /*
  * This function contains an initial loop to read in all appropriate PathologySites with another 
  * loop nested inside to populate the Select with appropriate Options.
  */
-require("assets/php/mysql_connector.php");
+$host = 'localhost';//enter hostname
+$SQLuserName = 'root';//enter user name of DB 
+$Pass = 'Rycbar1234!'; //enter password 
+$DB = 'equine'; //Enter database name
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB); // Uses read-only user
 	if (!$mysqli) {
 			 echo "Could not connect to database \n";
@@ -88,7 +88,7 @@ $limb = forelimb;
    // $mysqli.mysqli_close();
 ?>
 <!-- Finally, we can make the button to submit the form -->
-<button type="submit" onClick="new_assessment($mysqli)" >Submit</button>
+<button type="submit">Submit</button>
 </form>
 
  <script>
