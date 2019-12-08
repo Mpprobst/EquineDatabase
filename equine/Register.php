@@ -29,7 +29,19 @@ if(isset($_COOKIE["equine_database"])) {
                         <div class="form-group">
                             <label for="clinic">Enter your clinic's name</label>
                             <select class="form-control" id="clinic" name="rclinic">
-                                <option value="default-clinic">Default or unknown clinic</option>
+                            <?php
+                                require("assets/php/mysql_connector.php");
+                                $mysqli = new mysqli($host, $SQLuserName, $Pass, $DB);
+                                if ($mysqli->connect_error) {
+                                    die("Connection failed: " . $mysqli->connect_error);
+                                }
+                                $getClinics = "SELECT * FROM Clinic;";
+
+                                $result = $mysqli->query($getClinics);
+                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                    echo "<option value=\"" . $row["Lid"] . "\">" . $row["Name"] . "</option>";
+                                }
+                            ?>
                             </select>
                             <small class="form-text text-muted">If you do not see your clinic, please contact a system administrator</small>
                         </div>

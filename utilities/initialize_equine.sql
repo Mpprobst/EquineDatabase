@@ -1570,7 +1570,7 @@ CREATE TABLE IF NOT EXISTS Assessment (
 
         FOREIGN KEY(Cuser)
                 REFERENCES User(Uid)
-                ON UPDATE CASCADE ON DELETE CASCADE
+                ON UPDATE CASCADE ON DELETE CASCADE,
 				
 		FOREIGN KEY(Clinic)
 				REFERENCES Clinic(Lid)
