@@ -28,7 +28,10 @@ if(isset($_COOKIE["equine_database"])) {
                     <form action="functions/php/registration.php"  method="post">
                         <div class="form-group">
                             <label for="clinic">Enter your clinic's name</label>
-                            <input type="text" class="form-control" id="clinic" name="rclinic" placeholder="Clinic Name" />
+                            <select class="form-control" id="clinic" name="rclinic">
+                                <option value="default-clinic">Default or unknown clinic</option>
+                            </select>
+                            <small class="form-text text-muted">If you do not see your clinic, please contact a system administrator</small>
                         </div>
                         <div class="form-group">
                             <label for="username">Create a Username</label>
