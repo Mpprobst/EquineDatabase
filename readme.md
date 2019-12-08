@@ -7,6 +7,10 @@ Produced for CS405G-001 (Final Group Project)
 - Nicholas Poe
 - Jake Hayden
 
+### Outside Resourses:
+- Plotly.ly : a JavaScript open source graphing library. We use Plotly to produce graphs displaying pathology data.
+- Bootstrap4 : an open source toolkit for developing with HTML, CSS, and JS. We use Bootstrap to improve the general asthetic of our website.  
+
 ### Completed Functionality & Pages
 ### Current Goals
 - Homepage & Login/logout functionality
