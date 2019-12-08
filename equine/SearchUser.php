@@ -23,8 +23,12 @@ if (isset($_COOKIE["equine_database"])) {
 					<div class="form-group">
 						<label for="search">Enter a username</label>
 						<input id="search" name="search" class="form-control" type="text"  />
+						<small class="form-text text-muted">Please note: You will only be able to see users who are in the same clinic as you.</small>
 					</div>
-					<button class="btn btn-primary" type="submit">Submit</button>
+					<div class="btn-group" role="group">
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+						<a class="btn btn-secondary" href="home.php">Back</a>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -38,7 +42,7 @@ if (isset($_COOKIE["equine_database"])) {
                 $query = "SELECT * FROM User  WHERE User.Name LIKE '". $_POST['search']. "%' AND User.Clinic = \"". $cookie_array[2] . "\";";
                 $result = $mysqli->query($query);
                 if($result->num_rows > 0) {
-                        echo "<h2>Users matching your search in your clinic:</h2>";
+                        echo "<h2>Users matching your search in \"".$cookie_array[2]."\":</h2>";
 						echo "<table class=\"table table-responsive table-hover\">";
 						echo "<thead><tr><th>Username</th><th>Role</th><th>Grant Privileges?</th><th>Revoke Privileges?</th></tr></thead><tbody>";
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -53,7 +57,7 @@ if (isset($_COOKIE["equine_database"])) {
                 }
         }
 ?>
-				<a class="btn btn-secondary" href="home.php">Back</a>
+				
 <?php
 } else {
         echo "Not Logged In";

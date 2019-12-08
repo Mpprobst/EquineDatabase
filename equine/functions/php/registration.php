@@ -1,8 +1,3 @@
-<html>
-<head>
-<title>Equine Project - Login Results</title>
-</head>
-<body>
 <?php
 
 function register($newName,$newPass,$mysqli){
@@ -59,14 +54,7 @@ $newName = $_POST["rusername"];
 $newPass = $_POST["rpassword"];
 $Username = $_POST["username"];
 $Password = $_POST["password"];
-//echo $newPass;
-//echo $Username;
-//echo $Password;
-//echo "here";
-//$host = 'localhost';//enter hostname
-//$SQLuserName = 'read-write';//enter user name of DB
-//$Pass = 'shakespeare16'; //enter password
-//$DB = 'equine'; //Enter database name
+
 require("../../assets/php/mysql_connector.php");
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
 
@@ -92,5 +80,3 @@ $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
  }
 
 ?>
-</body>
-</html>
