@@ -4,6 +4,6 @@ SITE=/var/www/html/equine/
 
 if test -e "$SITE"; then
 	sudo rm -r $SITE
-  sudo mkdir $SITE
 fi
+sudo mkdir $SITE
 sudo cp -r ../equine/* $SITE #copy all files from equine folder to the site folder

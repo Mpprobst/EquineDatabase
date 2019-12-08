@@ -2,8 +2,8 @@
 <html>
 
 <head>
-        <title>Equine Project | View an Assessment </title>
-        <meta charset="UTF-8" />
+    <title>Equine Project | View an Assessment </title>
+    <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">
 	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
