@@ -26,11 +26,12 @@ if(isset($_COOKIE["equine_database"])) {
 	echo "<div class=\"btn-group-vertical\" role=\"group\">";
 
 	echo "<a class=\"btn btn-primary mb-2\" href=\"SearchHorse.php\">Select Horse</a>";
-	//echo "<li><a class=\"button\" href=\"homepage.php\">Assessment Homepage</a></li>";
+	
 	if($cookie_array[1] == "read-write") {
 		echo "<a class=\"btn btn-primary mb-2\" href=\"NewHorse.php\">Add New Horse</a>";
 		echo "<a class=\"btn btn-primary mb-2\" href=\"SearchUser.php\">Manage a User</a>";
 	}
+	echo "<li><a class=\"btn btn-success mb-2\" href=\"analytics/reporting.php\">Reports &amp; Statistics</a></li>";
 	echo "<a href=\"functions/php/logout.php\" class=\"btn btn-secondary\">Logout</a>";
 	echo "</div>";
 	if($cookie_array[1] == "read-only") {
