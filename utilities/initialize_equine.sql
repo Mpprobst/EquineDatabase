@@ -1562,6 +1562,7 @@ CREATE TABLE IF NOT EXISTS Assessment (
         RREH_Cid TEXT NOT NULL,
         Limb TEXT NOT NULL,
         PhantomDensityIncluded BOOL,
+		Side TEXT NOT NULL,
 		Clinic INT NOT NULL,
 
         FOREIGN KEY(Chorse)
