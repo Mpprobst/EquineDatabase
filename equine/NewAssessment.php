@@ -17,6 +17,7 @@ if(isset($_COOKIE["equine_database"])) {
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
+				<h1>Equine Lower <?php echo $_POST["Limb"]; ?> Pathology Form</h1>
 				<form method="post" action="./functions/php/InsertAssessment.php">
 
 					<input type="hidden" name="HorseID" value="<?php echo $_POST["Hid"]; ?>" />
@@ -49,7 +50,7 @@ if(isset($_COOKIE["equine_database"])) {
 						<input class="form-control" type="text" id="ukcid" name="UK_CID"/>
 						
 					</div>
-					<h1><?php echo $_POST["Limb"]; ?> Assessement</h1>
+					<h2><?php echo $_POST["Limb"]; ?></h2>
 					<div class="form-group">
 				<?php
 
