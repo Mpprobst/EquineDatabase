@@ -127,7 +127,10 @@ if(isset($_COOKIE["equine_database"])) {
 				?>
 				</div>
 				<!-- Finally, we can make the button to submit the form -->
-				<button type="submit" class="btn btn-primary" >Submit</button>
+				<div class="btn-group" role="group">
+					<button type="submit" class="btn btn-primary  mr-2" >Submit</button>
+					<a class="btn btn-danger" href="ViewHorse.php?id=<?php echo $_POST["Hid"]; ?>">Cancel</a>
+				</div>
 				</form>
 			</div>
 		</div>
