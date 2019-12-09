@@ -36,25 +36,25 @@ if (isset($_COOKIE["equine_database"])) {
 			<div class="col-sm-12">
 <?php
         if(isset($_POST["search"])) {
-	            $cookie_array = explode(",", $_COOKIE["equine_database"]);
-                require("assets/php/mysql_connector.php");
-                $mysqli = mysqli_connect($host, $ROuserName,$ROPass,$DB);
-                $query = "SELECT * FROM User  WHERE User.Name LIKE '". $_POST['search']. "%' AND User.Clinic = \"". $cookie_array[2] . "\";";
-                $result = $mysqli->query($query);
-                if($result->num_rows > 0) {
-                        echo "<h2>Users matching your search in \"".$cookie_array[2]."\":</h2>";
-						echo "<table class=\"table table-responsive table-hover\">";
-						echo "<thead><tr><th>Username</th><th>Role</th><th>Grant Privileges?</th><th>Revoke Privileges?</th></tr></thead><tbody>";
-                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-						echo "<tr><td>".$row['Name']."</td>";
-						echo "<td>".$row['Role']."</td>";
-						echo "<td><a href='admin/php/GrantRoles.php?id=".$row["uid"]."'>Grant Write Permissions</a></td>";
-						echo "<td><a href='admin/php/RevokeRoles.php?id=".$row["uid"]."'>Revoke Write Permissions</a></td></tr>";
-                }
-                        echo "</tbody></table>";
-                } else {
-                        echo "<p>No Users match your search term within your clinic</p>";
-                }
+			$cookie_array = explode(",", $_COOKIE["equine_database"]);
+			require("assets/php/mysql_connector.php");
+			$mysqli = mysqli_connect($host, $ROuserName,$ROPass,$DB);
+			$query = "SELECT User.Name AS Name, User.Role AS Role, User.uid AS uid, Clinic.Name AS Clinic FROM User INNER JOIN Clinic ON User.Clinic = Clinic.Lid WHERE User.Name LIKE '". $_POST['search']. "%' AND Clinic.Lid = \"". $cookie_array[2] . "\";";
+			$result = $mysqli->query($query);
+			if($result->num_rows > 0) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+					echo "<h2>Users matching your search in \"".$row["Clinic"]."\":</h2>";
+					echo "<table class=\"table table-responsive table-hover\">";
+					echo "<thead><tr><th>Username</th><th>Role</th><th>Grant Privileges?</th><th>Revoke Privileges?</th></tr></thead><tbody>";
+					echo "<tr><td>".$row['Name']."</td>";
+					echo "<td>".$row['Role']."</td>";
+					echo "<td><a href='admin/php/GrantRoles.php?id=".$row["uid"]."'>Grant Write Permissions</a></td>";
+					echo "<td><a href='admin/php/RevokeRoles.php?id=".$row["uid"]."'>Revoke Write Permissions</a></td></tr>";
+					echo "</tbody></table>";
+				}
+			} else {
+					echo "<p>No Users match your search term within your clinic</p>";
+			}
         }
 ?>
 				

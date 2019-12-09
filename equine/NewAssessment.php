@@ -1,109 +1,142 @@
-<?php
-/* Example: Create a list of Selects within a form with dropdowns populated appropriately
-*/
-?>
-<style>
-.fixedContainer {
-	position: relative;
-	left: 5px;
- }
-.other{
-	position: relative;
-        left: 20px;
-}
-.phantom{
-	position: relative;
-	left: 30px;
-}
-.EuthTrue{
-	display:none;
-	position: relative;
-	left:30px;
-}
+<!doctype html>
+<html lang="en">
 
-</style>
+<head>
+	<title>Equine Project | Create New Assessment</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+</head>
 <body>
-<form method="post" action="./functions/php/InsertAssessment.php"> <!-- Note: Sample file name.-->
-<!-- Additional Data that needs to be collected for form goes here.  I'll provide one example. -->
-	<input type="hidden" name="HorseID" id="Hid" value=$_POST["Hid"]/>
-	<input type="hidden" type='date' name="Date" id='hasta' value='<?php echo date('Y-m-d');?>'/>
-
-	<label for="roodriddle">Rood and Riddle Case Number:</label>
-	<input type="text" name="RREH_CID" id="RoodRiddle" />
-	<label class = "other" for="leg">Side Assessed</label>
-	<select class = "other" name="SideAssessed">
-		<option value="1">Left</option>
-		<option value="2">Right</option>
-	</select>
-
-	<label class = "phantom" for="Phantom">Phantom Density Normalization Included?</label>
-	<input class = "phantom" type ="checkbox" name = "Phantom"/><br></br>
-
-	<label>Euthanized?</label>
-	<input type="checkbox" onclick="openEuthanasiaDate(this.checked)" name="Euthanized?"/>
-	<div class = "EuthTrue" id = "EuthanasiaTrue">
-		<label> Date of Euthanasia:</label>
-		<input type="date" name="euthanasiaDate"/>
-		<label> UK Veterinary Diagnostic Case Number:</label>
-		<input type="text" name="UK_CID"/>
-	</div>
-	<input type="hidden" name="Limb" value="Forelimb"/>
-	<h1>Bone Assessement</h1>
 <?php
-/*
- * This function contains an initial loop to read in all appropriate PathologySites with another 
- * loop nested inside to populate the Select with appropriate Options.
- */
-require("assets/php/mysql_connector.php");
-$mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB); // Uses read-only user
-	if (!$mysqli) {
-			 echo "Could not connect to database \n";
-			 	 echo "Error: ". $mysqli->connect_error . "\n";
-	}
-$limb = forelimb;
-    // ASSUME: $limb has already been provided, probably by the POST request submitting horse information to this page.
-    $siteQuery = "SELECT * FROM PathologySite WHERE Limb ='" . $limb . "'"; //Creates Select Query
-    $sites = $mysqli->query($siteQuery); // ($sites is a "MySQLi Result")
-    while ($site = mysqli_fetch_array($sites, MYSQLI_ASSOC)) { //$site is an individual associative array (row) from the query results
-        $locationName = $site["Bone"]; // Adds the Bone to the Location Name string
-        if ($site["Site"] != null) {
-            $locationName .= " " . $site["Site"]; // If there is a "site" add it to the name
-        }
-        if ($site["SiteB"] != null) {
-            $locationName .= " " . $site["SiteB"]; // If there is a "siteb" add it to the name
-        }
-        echo "<label for= S" . $site["Sid"] . ",>" . $locationName . "</label>"; //Display name in label
-	//echo "<br></br>";
-	//Build the actual select and then populate with possible options
-        echo "<select class = fixedcontainer style = 'width:15%; margin-bottom:20px; 'name='". $site["Sid"]."' id='S" . $site["Sid"] . "'>";
-            $pathQuery = "SELECT S.Sid, P.Pname, P.Pid FROM Pathology as P INNER JOIN PathologyAtSite as A ON P.Pid = A.Pid INNER JOIN PathologySite as S ON A.Sid = S.Sid where S.Sid='" . $site["Sid"] . "'";
-            $pathologies = $mysqli->query($pathQuery);
-            while ($pathology = mysqli_fetch_array($pathologies, MYSQLI_ASSOC)){
-                echo "<option value='". $pathology["Pid"]. "'>" . $pathology["Pname"] . "</option>";
-            }
-	    echo "</select><br></br>";
-    }
+if(isset($_COOKIE["equine_database"])) {
+	?>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<form method="post" action="./functions/php/InsertAssessment.php">
 
-    // After building the form, we need to close the mysqli connection (verify syntax)
-   // $mysqli.mysqli_close();
+					<input type="hidden" name="HorseID" value="<?php echo $_POST["Hid"]; ?>" />
+					<input type="hidden" name="Date" value="<?php echo date('Y-m-d'); ?>" />
+					<input type="hidden" name="Limb" value="<?php echo $_POST["Limb"]; ?>" />
+					<input type="hidden" name="RREH_Default" value="<?php echo $_POST["RREH_Cid"]; ?>" />
+					
+
+					<div class="form-group">
+						<label for="RoodRiddle">Rood and Riddle Case Number:</label>
+						<input type="text" class="form-control" name="RREH_CID" id="RoodRiddle" value="<?php echo $_POST["RREH_Cid"]; ?>"/>
+					</div>
+					<div class="form-group">
+						<label for="leg">Side Assessed</label>
+						<select class="form-control" id="leg" name="SideAssessed">
+							<option value="Left">Left</option>
+							<option value="Right">Right</option>
+						</select>
+
+						<label for="Phantom">Phantom Density Normalization Included?</label>
+						<input class="input-control" type="checkbox" name="Phantom" id="Phantom" />
+					</div>
+
+					<div class="form-group">
+						<label for="dod"> Date of Euthanasia:</label>
+						<input class="form-control" type="date" id="dod" name="Hdod" />
+						<small class="form-text text-muted">If horse not euthanized, please leave blank</small>
+
+						<label for="ukcid">UK Veterinary Diagnostic Case Number:</label>
+						<input class="form-control" type="text" id="ukcid" name="UK_CID"/>
+						
+					</div>
+					<h1><?php echo $_POST["Limb"]; ?> Assessement</h1>
+					<div class="form-group">
+				<?php
+
+				function getOptions($sid, $mysqli) {
+					echo "<select class=\"form-control\" name=\"". $sid . "\" id=\"S" . $sid . "\">";
+					$pathQuery = "SELECT S.Sid, P.Pname, P.Pid FROM Pathology as P INNER JOIN PathologyAtSite as A ON P.Pid = A.Pid INNER JOIN PathologySite as S ON A.Sid = S.Sid where S.Sid=\"" . $sid . "\"";
+					$pathologies = $mysqli->query($pathQuery);
+					while ($pathology = mysqli_fetch_array($pathologies, MYSQLI_ASSOC)){
+						echo "<option value=\"". $pathology["Pid"]. "\">" . $pathology["Pname"] . "</option>";
+					}
+					echo "</select>";
+				}
+
+				require("assets/php/mysql_connector.php");
+				$mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
+				if (!$mysqli) {
+						echo "Error: ". $mysqli->connect_error . "\n";
+				}
+					
+				$siteQuery = "SELECT * FROM PathologySite WHERE Limb=\"" . $_POST["Limb"] . "\";"; //Creates Select Query
+				$sites = $mysqli->query($siteQuery); // ($sites is a "MySQLi Result")
+				echo "<ol>"; //Ordered List
+				// Set up flags for list processing
+				$boneOpen = false;
+				$siteOpen = false;
+				while ($site = mysqli_fetch_array($sites, MYSQLI_ASSOC)) { //$site is an individual associative array (row) from the query results
+					$bone = $site["Bone"];
+					$loc = $site["Site"];
+					$locb = $site["SiteB"];
+					$locationName = "";
+
+					if ($locb == "") { 
+						// if a site is open, close it
+						if($siteOpen){
+							echo "</ol></li>";
+							$siteOpen = false;
+						}
+						// if it is not a siteb or a site, it must be a bone
+						if ($loc == "") { 
+							$locationName = $bone;
+							//if a bone is open, close it
+							if ($boneOpen){
+								echo "</ol></li>";
+								$boneOpen = false;
+							} 
+							// Open a new bone
+							echo "<li>";
+							echo "<label for=\"S" . $site["Sid"] . "\">" . $locationName . "</label>";
+							getOptions($site["Sid"], $mysqli);
+							$boneOpen = true;
+							echo "<ol type=\"a\">";
+						} else {  
+							// if it is a site
+							$locationName = $bone . " " . $loc;
+							// Open a new Site
+							echo "<li>";
+							echo "<label for=\"S" . $site["Sid"] . "\">" . $locationName . "</label>";
+							getOptions($site["Sid"], $mysqli);
+							$siteOpen = true;
+							echo "<ol type=\"i\">";
+						}
+					} else {
+						$locationName = $bone . " " .$loc. " " . $locb;
+						// Open and close a new siteb
+						echo "<li>";
+						echo "<label for=\"S" . $site["Sid"] . "\">" . $locationName . "</label>";
+						getOptions($site["Sid"], $mysqli);
+						echo "</li>";
+					}
+				}
+				echo "</ol>";
+
+				
+				// // $mysqli.mysqli_close();
+				?>
+				</div>
+				<!-- Finally, we can make the button to submit the form -->
+				<button type="submit" class="btn btn-primary" >Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<?php
+} else {
+	echo "not logged in";
+	header("Location: http://" . $ip . "/equine/");
+}
 ?>
-<!-- Finally, we can make the button to submit the form -->
-<button type="submit" onClick="new_assessment($mysqli)" >Submit</button>
-</form>
-
- <script>
- 	function openEuthanasiaDate(isChecked){
-		if (isChecked)
-		{
-			document.getElementById("EuthanasiaTrue").style.display="block";
-		}
-		else
-		{	
-			document.getElementById("EuthanasiaTrue").style.display="none";
-		}
-	}
-    </script>
-
 </body>
-
-
+</html>

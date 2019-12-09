@@ -2,6 +2,7 @@
 require("../../assets/php/redirect_helper.php");
 if (isset($_COOKIE["equine_database"]))
 {
+    
     // Make SQL connection
     require("../../assets/php/mysql_connector.php");
     $mysqli = new mysqli($host, $SQLuserName, $Pass, $DB);
@@ -11,10 +12,13 @@ if (isset($_COOKIE["equine_database"]))
     }
 
     // Check to see if horse already exists
-    $checker = "SELECT * FROM Horse WHERE Hname =\"" . $_POST["Hname"] . " ";
+    $checker = "SELECT * FROM Horse WHERE Hname =\"" . $_POST["Hname"] . "\" ";
     $checker .= "AND RREH_Cid =\"" . $_POST["RREH_Cid"] . "\";";
     $check = $mysqli->query($checker);
-    if($check->num_rows > 0) {
+    if($check->num_rows <= 0) {
+
+        $cookie_array = explode(",", $_COOKIE["equine_database"]);
+        $currentUser = $cookie_array[3];
         // Generate Insert Query from Post Data
         $query = "INSERT INTO Horse VALUES (NULL,\"" . $_POST["Hname"] . "\",\"";
         $query .= $_POST["Hdob"] . "\",";
@@ -25,7 +29,8 @@ if (isset($_COOKIE["equine_database"]))
         $query .= $_POST["RREH_Cid"] . "\",";
         $query .= $_POST["RaceTraining"] . ",";
         $query .= $_POST["RaceExternal"] . ",";
-        $query .= ($_POST["RaceStartAge"] != "" ?  $_POST["RaceStartAge"] : "NULL");
+        $query .= ($_POST["RaceStartAge"] != "" ?  $_POST["RaceStartAge"] : "NULL") . ",";
+        $query .= $currentUser;
         $query .= ");";
 
         // Insert Horse

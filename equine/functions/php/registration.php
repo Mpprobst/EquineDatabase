@@ -1,6 +1,6 @@
 <?php
 
-function register($newName,$newPass,$mysqli){
+function register($newName,$newPass,$mysqli, $clinic){
 	$existingUser = "SELECT Name from User where (User.Name = '$newName')"; 
 	$res = $mysqli->query($existingUser);
 	//if user already exists
@@ -9,7 +9,7 @@ function register($newName,$newPass,$mysqli){
 	}
 	else{
 		//inserting user into User table
-		$insertQuery = "INSERT INTO User (Name, Pass, Clinic, Role) VALUES('$newName','$newPass', 'default-clinic', 'read-only')";
+		$insertQuery = "INSERT INTO User (Name, Pass, Clinic, Role) VALUES('$newName','$newPass', '$clinic', 'read-only')";
 		$res = $mysqli->query($insertQuery);
 		if($res){
 			echo "<h2>".$newName.": Created succesfully</h2>";
@@ -21,12 +21,12 @@ function register($newName,$newPass,$mysqli){
 	}
 }
 function login($Username,$Password,$mysqli){
-	$existingUser = "SELECT * FROM User WHERE (User.Name = '$Username') and (User.Pass ='$Password')";
+	$existingUser = "SELECT User.uid AS uid, User.Name As Name, User.Role As Role, Clinic.Lid As Clinic FROM User INNER JOIN Clinic ON User.Clinic = Clinic.Lid WHERE (User.Name = '$Username') and (User.Pass ='$Password')";
 	$res = $mysqli->query($existingUser);
 	// if the user exists print out his information to show that it is actually in the table
 	if($res->num_rows >0){
 		$row= mysqli_fetch_array($res, MYSQLI_ASSOC);
-		$value= $row["Name"].",".$row["Role"].",".$row["Clinic"];
+		$value= $row["Name"].",".$row["Role"].",".$row["Clinic"].",".$row["uid"];
 		setcookie("equine_database", $value, time()+24*60*60, '/');
 		echo "<h3>".$Username.", You are now logged in</h3>";
 		echo "<table border='1'>";
@@ -54,6 +54,7 @@ $newName = $_POST["rusername"];
 $newPass = $_POST["rpassword"];
 $Username = $_POST["username"];
 $Password = $_POST["password"];
+$Clinic = $_POST["rclinic"];
 
 require("../../assets/php/mysql_connector.php");
 $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
@@ -67,7 +68,7 @@ $mysqli = mysqli_connect($host, $SQLuserName,$Pass,$DB);
  }
  else {
 	 if(($newName!=NULL && $newPass!=NULL)){		 
-		 register($newName,$newPass,$mysqli);
+		 register($newName,$newPass,$mysqli, $Clinic);
 		 //call function here
 	 }
 	 else if(($Username!=NULL && $Password!=NULL)){

@@ -19,18 +19,31 @@
 if(isset($_COOKIE["equine_database"])) {
 	$cookie_array = explode(",", $_COOKIE["equine_database"]);
 	echo "<h1>Welcome ".$cookie_array[0].",</h1>";
-	echo "<p>Your Clinic: ".$cookie_array[2]."</p>";
+	
+	// Get Clinic Name for Display
+	require("assets/php/mysql_connector.php");
+	$mysqli = new mysqli($host,$ROuserName, $ROPass, $DB);
+	if(!$mysqli) {
+		die("Connection failed: ".mysqli_connect_error());
+	}
+	$getClinic = "SELECT Name FROM Clinic WHERE Lid=\"" . $cookie_array[2] . "\";";
+	$clinicRes = $mysqli->query($getClinic);
+	while ($clinic = mysqli_fetch_array($clinicRes, MYSQLI_ASSOC)) {
+		echo "<p>Your Clinic: ".$clinic["Name"]."</p>";
+	}
 
 	echo "<p>Please choose an option:</p>";
 
 	echo "<div class=\"btn-group-vertical\" role=\"group\">";
 
 	echo "<a class=\"btn btn-primary mb-2\" href=\"SearchHorse.php\">Select Horse</a>";
-	//echo "<li><a class=\"button\" href=\"homepage.php\">Assessment Homepage</a></li>";
+	
 	if($cookie_array[1] == "read-write") {
 		echo "<a class=\"btn btn-primary mb-2\" href=\"NewHorse.php\">Add New Horse</a>";
 		echo "<a class=\"btn btn-primary mb-2\" href=\"SearchUser.php\">Manage a User</a>";
 	}
+	// TODO : remove enclosing "<li>" tags to remove the indicator dot
+	echo "<li><a class=\"btn btn-success mb-2\" href=\"analytics/reporting.php\">Reports &amp; Statistics</a></li>";
 	echo "<a href=\"functions/php/logout.php\" class=\"btn btn-secondary\">Logout</a>";
 	echo "</div>";
 	if($cookie_array[1] == "read-only") {

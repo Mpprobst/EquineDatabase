@@ -6,13 +6,35 @@ CREATE DATABASE IF NOT EXISTS equine; -- Create the equine database.  Uncomment 
 
 USE equine;
 
+-- Create Clinics Table
+CREATE TABLE IF NOT EXISTS Clinic(
+	Lid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+	Name TEXT(15) NOT NULL
+	);
+
+-- Populate Clinics Table
+INSERT INTO Clinic VALUES (NULL, 'default-clinic');
+
+-- We may need to populate further clinics above ^^^^
+
 -- Create Users Table
-CREATE TABLE IF NOT EXISTS User(uid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, Name TEXT(15) NOT NULL, Pass TEXT NOT NULL, Clinic TEXT, Role TEXT);
+CREATE TABLE IF NOT EXISTS User(
+		uid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+		Name TEXT(15) NOT NULL, 
+		Pass TEXT NOT NULL, 
+		Clinic INT NOT NULL, 
+		Role TEXT,
+
+        FOREIGN KEY (Clinic)
+                REFERENCES Clinic(Lid)
+                ON UPDATE CASCADE ON DELETE CASCADE
+		);
 
 -- Populate Users Table with 'Default Clinic' users.
-INSERT INTO User VALUES (NULL, 'Admin', 'admin', 'default-clinic', 'read-write'), 
-        (NULL, 'Reader', 'reader', 'default-clinic', 'read-only'),
-        (NULL, 'cs405', 'cs405', 'default-clinic', 'read-write');
+INSERT INTO User VALUES (NULL, 'Admin', 'admin', 1, 'read-write'), 
+        (NULL, 'Reader', 'reader', 1, 'read-only'),
+        (NULL, 'cs405', 'cs405', 1, 'read-write');
+
 
 -- Create Horse Table
 CREATE TABLE IF NOT EXISTS Horse (
@@ -26,13 +48,18 @@ CREATE TABLE IF NOT EXISTS Horse (
         RREH_Cid TEXT NOT NULL,
         RaceTraining BOOL,
         RaceExternal BOOL,
-        RaceStartAge INT
+        RaceStartAge INT,
+		Uid INT NOT NULL,
+
+		FOREIGN KEY (Uid)
+			REFERENCES User(Uid)
+			ON UPDATE CASCADE ON DELETE CASCADE
         );
 
 -- Create Horse Sample Data.
 
-INSERT INTO Horse VALUES (NULL, 'Horsie', '1999-11-11', NULL, 'arabian', 'intact-male', NULL, '123456789', NULL, NULL, NULL);
-INSERT INTO Horse VALUES (NULL, 'Pony', '1999-11-11', NULL, 'thoroughbred', 'female', NULL, '123412341', NULL, NULL, NULL);
+INSERT INTO Horse VALUES (NULL, 'Horsie', '1999-11-11', NULL, 'arabian', 'intact-male', NULL, '123456789', NULL, NULL, NULL, 1);
+INSERT INTO Horse VALUES (NULL, 'Pony', '1999-11-11', NULL, 'thoroughbred', 'female', NULL, '123412341', NULL, NULL, NULL, 1);
 
 -- PathologySite table creation and population. Pathology Site is the physical location being assessed on a form.
 
@@ -1535,6 +1562,8 @@ CREATE TABLE IF NOT EXISTS Assessment (
         RREH_Cid TEXT NOT NULL,
         Limb TEXT NOT NULL,
         PhantomDensityIncluded BOOL,
+		Side TEXT NOT NULL,
+		Clinic INT NOT NULL,
 
         FOREIGN KEY(Chorse)
                 REFERENCES Horse(Hid)
@@ -1542,7 +1571,12 @@ CREATE TABLE IF NOT EXISTS Assessment (
 
         FOREIGN KEY(Cuser)
                 REFERENCES User(Uid)
-                ON UPDATE CASCADE ON DELETE CASCADE);
+                ON UPDATE CASCADE ON DELETE CASCADE,
+				
+		FOREIGN KEY(Clinic)
+				REFERENCES Clinic(Lid)
+				ON UPDATE CASCADE ON DELETE CASCADE
+		);
 
 -- We can generate sample data here.
 

@@ -32,12 +32,14 @@ if (isset($_COOKIE["equine_database"])) {
 
 	$result = $conn->query($query);
 	$horseName;
+	$RREH_Cid;
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		$death = ($row["Hdod"] == "") ? "Not Applicable" : $row["Hdod"];
 		echo "<h2>Signalment</h2>";
 		echo "<p><strong>Name:</strong> ".$row["Hname"]."</p>";
 		$horseName = $row["Hname"];
 		echo "<p><strong>Rood &amp; Riddle Equine Hospital ID:</strong> ". $row["RREH_Cid"] . "</p>";
+		$RREH_Cid = $row["RREH_Cid"];
 		echo "<p><strong>UK Pathology Case ID:</strong> ". $row["UK_Cid"] ."</p>";
 		echo "<p><strong>Date of Birth:</strong> ".$row["Hdob"]."</p>";
 		echo "<p><strong>Date of Death or Euthanasia:</strong> ".$death."</p>";
@@ -60,12 +62,12 @@ if (isset($_COOKIE["equine_database"])) {
 			<h2>Assessments</h2>
 <?php
 	
-	$assessQuery = "SELECT * FROM Assessment INNER JOIN User ON Assessment.Cuser = User.uid WHERE Assessment.Chorse = '$hid'";
+	$assessQuery = "SELECT Assessment.RREH_Cid AS RREH_Cid, Clinic.Name AS Clinic, User.Name AS Name, Assessment.Limb AS Limb, Assessment.Side AS Side, Assessment.Cdate AS Cdate FROM Assessment INNER JOIN User ON Assessment.Cuser = User.uid INNER JOIN Clinic ON User.Clinic = Clinic.Lid WHERE Assessment.Chorse = '$hid'";
 	$assessments = $conn->query($assessQuery);
 	if ($assessments->num_rows > 0){
 		echo "<h3>Pathology Assessments for " . $horseName . "</h3>";
 		echo "<table class=\"table table-responsive table-hover\">";
-		echo "<thead><tr><th>Rood &amp; Riddle Case ID</th><th>Clinic</th><th>Assessor</th><th>Limb</th><th>Date</th></tr></thead>";
+		echo "<thead><tr><th>Rood &amp; Riddle Case ID</th><th>Clinic</th><th>Assessor</th><th>Limb</th><th>Side</th><th>Date</th></tr></thead>";
 		echo "<tbody>";
 		while ($row = mysqli_fetch_array($assessments, MYSQLI_ASSOC)) {
 			echo "<tr>";
@@ -73,6 +75,7 @@ if (isset($_COOKIE["equine_database"])) {
 			echo "<td>" . $row["Clinic"] . "</td>";
 			echo "<td>" . $row["Name"] . "</td>";
 			echo "<td>" . $row["Limb"] . "</td>";
+			echo "<td>" . $row["Side"] . "</td>";
 			echo "<td>" . $row["Cdate"] . "</td>";
 			echo "</tr>";
 		}
@@ -100,6 +103,7 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "<form method=\"post\" action=\"NewAssessment.php\">";
 		echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
 		echo "<input type=\"hidden\" name=\"Limb\" value=\"Forelimb\" />";
+		echo "<input type=\"hidden\" name=\"RREH_Cid\" value=\"" . $RREH_Cid . "\" />";
 		echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Forelimb Assessment</button>";
 		echo "</form>";
 	
@@ -107,6 +111,7 @@ if (isset($_COOKIE["equine_database"])) {
 		echo "<form method=\"post\" action=\"NewAssessment.php\">";
 		echo "<input type=\"hidden\" name=\"Hid\" value=\"" . $hid . "\" />";
 		echo "<input type=\"hidden\" name=\"Limb\" value=\"Hindlimb\" />";
+		echo "<input type=\"hidden\" name=\"RREH_Cid\" value=\"" . $RREH_Cid . "\" />";
 		echo "<button type=\"submit\" class=\"btn btn-primary mr-2\">New Hindlimb Assessment</button>";
 		echo "</form>";
 	}
