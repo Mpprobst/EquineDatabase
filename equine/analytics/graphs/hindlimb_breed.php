@@ -10,7 +10,7 @@
                 die("Connection failed: " . $mysqli->connect_error);
 	}
 	// Get the names of all Forelimb bones
-	$forelimb = "\"Forelimb\"";
+	$forelimb = "\"Hindlimb\""; // ignore the fact that Hindlimb is stored in forelimb
 	$bone_query = "Select DISTINCT Bone From PathologySite WHERE Limb = " . $forelimb . ";";
 	$bone_result = $mysqli->query($bone_query); 
 	$bone_array = array();
@@ -33,8 +33,7 @@
 		$bone = "\"" . $bone_array[$i] . "\"";
 		$bad_query = "SELECT h.Hbreed, COUNT(c.Sid) as " . $bone . " FROM CasePathology c, PathologySite s, Assessment a, Horse h WHERE a.Cid = c.Cid AND c.Sid = s.Sid AND c.Pid > 2 AND a.Chorse = h.Hid AND s.Bone = " . $bone . " GROUP BY h.Hbreed;";
 		$temp_query = "SELECT h.Hbreed, COUNT(c.Sid) as " . $bone . " FROM CasePathology c, PathologySite s, Assessment a, Horse h WHERE a.Cid = c.Cid AND c.Sid = s.Sid AND a.Chorse = h.Hid AND s.Bone = " . $bone . " GROUP BY h.Hbreed;";
-		// store counts of abnormalities into a matrix correlating to 
-		//echo "querying: " . $temp_query . "<br>";	
+		
 		$temp_result = $mysqli->query($temp_query);
 		while($row = mysqli_fetch_array($temp_result, MYSQLI_ASSOC)) {
 			$breed = "\"" . $row["Hbreed"] . "\"";
@@ -118,14 +117,14 @@
 <div class="container">
         <div class="row">
                 <div class="col-sm-12">
-                        <h2>Forelimb Abnormalities</h2>
+                        <h2>Hindlimb Abnormalities</h2>
                         <!-- Plotly chart will be drawn inside this DIV -->
                         <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">
                                         <div id="Chart" class="GraphArea"></div>
                                         <div class="btn-group">
-                                                <a href="hindlimb_breed.php" class="btn btn-primary mr-2">Hindlimb Abnormalities</a>
+                                                <a href="forelimb_breed.php" class="btn btn-primary mr-2">Forelimb Abnormalities</a>
                                                 <a href="../reporting.php" class="btn btn-primary mr-2">Reporting Home</a>
                                                 <a href="../../home.php" class="btn btn-secondary">Home</a>
                                         </div>
@@ -151,9 +150,7 @@
         var bad_counts = <?php echo json_encode($bad_matrix); ?>;
 	for (var i = 0; i < total_counts.length; i++) {
 		percents[i] = new Array(total_counts[i].length);
-	        //alert("percent length" + percents[i].length);	
 		for (var j = 0; j < total_counts[i].length; j++) {
-			//alert("count at " + bones[i] + "="  + total_counts[i][j]);
                 	percents[i][j] = 100 * bad_counts[i][j] / total_counts[i][j];
 		}
 	}
@@ -183,7 +180,7 @@
 	};
 	var data = [trace0, trace1, trace2, trace3];
 	var layout = {
-		title: "Percentage of Abnormal Forelimb Pathology Designations by Breed",
+		title: "Percentage of Abnormal Hindlimb Pathology Designations by Breed",
 		xaxis: {title: "Breed"},
 		yaxis: {title: "Percentage (%)"},
 		legend: {

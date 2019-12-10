@@ -62,7 +62,7 @@ if (isset($_COOKIE["equine_database"])) {
 			<h2>Assessments</h2>
 <?php
 	
-	$assessQuery = "SELECT Assessment.RREH_Cid AS RREH_Cid, Clinic.Name AS Clinic, User.Name AS Name, Assessment.Limb AS Limb, Assessment.Side AS Side, Assessment.Cdate AS Cdate FROM Assessment INNER JOIN User ON Assessment.Cuser = User.uid INNER JOIN Clinic ON User.Clinic = Clinic.Lid WHERE Assessment.Chorse = '$hid'";
+	$assessQuery = "SELECT Assessment.Cid AS Cid, Assessment.RREH_Cid AS RREH_Cid, Clinic.Name AS Clinic, User.Name AS Name, Assessment.Limb AS Limb, Assessment.Side AS Side, Assessment.Cdate AS Cdate FROM Assessment INNER JOIN User ON Assessment.Cuser = User.uid INNER JOIN Clinic ON User.Clinic = Clinic.Lid WHERE Assessment.Chorse = '$hid'";
 	$assessments = $conn->query($assessQuery);
 	if ($assessments->num_rows > 0){
 		echo "<h3>Pathology Assessments for " . $horseName . "</h3>";
