@@ -9,15 +9,15 @@
 	if ($mysqli->connect_error) {
 			die("Connection failed: " . $mysqli->connect_error);
 	}
-	$query = "SELECT COUNT(sid) AS InjuryCount, Horse.Hbreed FROM CasePathology, Assessment, Horse WHERE CasePathology.Cid = Assessment.Cid AND Assessment.Chorse = Horse.Hid AND CasePathology.Pid > 2 GROUP BY Horse.Hbreed;";
+	$query = "SELECT A.Limb AS Limb, A.Side AS Side, A.Bone AS Bone, A.Pname AS Pathology, COUNT(*) AS Counting FROM (SELECT Limb, Side, Bone, Pname, Cid, Chorse, Pid FROM CasePathology NATURAL JOIN Assessment NATURAL JOIN PathologySite NATURAL JOIN Pathology) AS A INNER JOIN Horse ON A.Chorse = Horse.Hid WHERE Horse.Hbreed = \"arabian\" AND A.Pid > 2 GROUP BY A.Limb, A.Side, A.Bone, A.Pname;";
 	$result = $mysqli->query($query);
-	$breed_array = array();
-	$count_array = array();
+	
+	$path_count_array = array();
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		$breed = "\"" . $row["Hbreed"] . "\"";
-		array_push($breed_array, $breed);
-		array_push($count_array,$row["InjuryCount"]);
-		//echo "<br>breed=" . $result_array[0] . "<br>count=" . $row["InjuryCount"] . "<br>";
+		$bone = $row["Side"] . " " . $row["Limb"] . " " . $row["Bone"];
+		$pathology = "\"". $row["Pathology"] . "\""; 
+		$path_count = array($row["Pathology"], $row["Counting"], $bone);
+		array_push($path_count_array, $path_count);
 	}
 ?>
 <!doctype html>
@@ -35,7 +35,7 @@
 	<style>
 		.GraphArea {
 			width: 100%;
-			height: 20rem;
+			height: 40rem;
 		}
 	</style>
 
@@ -48,9 +48,36 @@
 			<h2>Reporting Home</h2>
 			<!-- Plotly chart will be drawn inside this DIV -->
 			<div class="row">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-6">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">
 					<div id="Chart" class="GraphArea"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+				<h3>SRC Summary Data (Percentages by Breed and Gender)</h3>
+				<?php
+					$summaryQuery = "SELECT Hbreed, Hgender, RaceTraining, RaceExternal, COUNT(*) AS Counted FROM Horse GROUP BY Hbreed, Hgender, RaceTraining, RaceExternal;";
+					$summary = $mysqli->query($summaryQuery);
+					if ($summary->num_rows >0) {
+						echo "<table class=\"table table-responsive table-hover\">";
+						echo "<thead>";
+						echo "<tr><th>Breed</th><th>Gender</th><th>Had Race Training</th><th>Raced Outside US</th><th>Age at Race Start</th><th></th></tr>";
+						echo "</thead><tbody>";
+						while($row = mysqli_fetch_array($summary, MYSQLI_ASSOC)){
+							echo "<tr>";
+							echo "<td>".$row["Hbreed"]."</td>";
+							echo "<td>".$row["Hgender"]."</td>";
+							echo "<td>". ($row["RaceTraining"] == 0 ? "No" : "Yes") ."</td>";
+							echo "<td>". ($row["RaceExternal"]== 0 ? "No" : "Yes")."</td>";
+							//echo "<td>".$row["RaceStartAge"]."</td>";
+							echo "<td>". ($row["Counted"] / $summary->num_rows * 100) ."%</td>";
+							echo "</tr>";
+						}
+						echo "</tbody></table>";
+
+					}
+					?>
 					<div class="btn-group">
 						<a href="graphs/injuries_by_breed.php" class="btn btn-primary mr-2">Injuries by Breed</a>
 						<a href="graphs/tes.php" class="btn btn-primary mr-2">TES</a>
@@ -64,16 +91,41 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script><!-- Plotly.js -->
 <script type="text/javascript">
 
-	var breeds = <?php echo json_encode($breed_array); ?>;
-	var counts = <?php echo json_encode($count_array); ?>;
+		var pathCountArray = <?php echo json_encode($path_count_array); ?>;
 
-	var trace = {
-		x: breeds,
-		y: counts,
-		type: 'bar',
-	  };
-	var data = [trace];
-	Plotly.newPlot('Chart', data, {}, {showSendToCloud: true});
+		var pathologies = {};
+		pathCountArray.forEach(function(path) {
+			if(!pathologies.hasOwnProperty(path[0])){
+				pathologies[path[0]] = {
+					name: path[0],
+					bone: [],
+					count: []
+				};
+			}
+			pathologies[path[0]].bone.push(path[2]);
+			pathologies[path[0]].count.push(path[1]);
+		});
+		
+
+	var traces = [];
+	for (var pathology in pathologies) {
+		if (pathologies.hasOwnProperty(pathology)) {
+
+		var trace = {
+			x: pathologies[pathology].bone,
+			y: pathologies[pathology].count,
+			name: pathologies[pathology].name,
+			type: 'bar'
+		};
+
+		traces.push(trace);
+		}
+		
+	}
+
+	var data = traces;
+	var layout = {barmode: 'stack'};
+	Plotly.newPlot('Chart', data, layout, {showSendToCloud: true});
 
 </script>
 </body>
