@@ -2,27 +2,30 @@
 /* This script uses an open source poltting library, Plotly, to create a D3.js based histogram.   
  */
 
-	require("../../assets/php/mysql_connector.php");
-	require("../../assets/php/redirect_helper.php");
+	require("../../../assets/php/mysql_connector.php");
+	require("../../../assets/php/redirect_helper.php");
 	$mysqli = new mysqli($host, $SQLuserName, $Pass, $DB);
 
 	if ($mysqli->connect_error) {
 		die("Connection failed: " . $mysqli->connect_error);
 	}
-	$bad_query = "SELECT COUNT(sid) AS InjuryCount, Horse.Hbreed FROM CasePathology, Assessment, Horse WHERE CasePathology.Cid = Assessment.Cid AND Assessment.Chorse = Horse.Hid AND CasePathology.Pid > 2 GROUP BY Horse.Hbreed;";
-	$count_query = "SELECT COUNT(sid) AS InjuryCount, Horse.Hbreed FROM CasePathology, Assessment, Horse WHERE CasePathology.Cid = Assessment.Cid AND Assessment.Chorse = Horse.Hid GROUP BY Horse.Hbreed;";
+	$forelimb = "\"Forelimb\"";
+	$bad_query =  "SELECT COUNT(sid) AS InjuryCount, Horse.Hbreed FROM CasePathology,Assessment,Horse WHERE Assessment.Limb = " . $forelimb . " AND CasePathology.Cid= Assessment.Cid AND Assessment.Chorse = Horse.Hid AND CasePathology.Pid > 2 GROUP BY Horse.Hbreed;";
+	//$bad_query = "SELECT COUNT(sid) AS InjuryCount, Horse.Hbreed FROM CasePathology, Assessment, Horse WHERE CasePathology.Cid = Assessment.Cid AND Assessment.Chorse = Horse.Hid AND CasePathology.Pid > 2 GROUP BY Horse.Hbreed;";
+	$count_query = "SELECT COUNT(sid) AS InjuryCount, Horse.Hbreed FROM CasePathology,Assessment,Horse WHERE Assessment.Limb = " . $forelimb . " AND CasePathology.Cid= Assessment.Cid AND Assessment.Chorse = Horse.Hid GROUP BY Horse.Hbreed;";
+	//$count_query = "SELECT COUNT(sid) AS InjuryCount, Horse.Hbreed FROM CasePathology, Assessment, Horse WHERE CasePathology.Cid = Assessment.Cid AND Assessment.Chorse = Horse.Hid GROUP BY Horse.Hbreed;";
 
 	$breed_array = array();
 	$bad_array = array();
 	$count_array = array();
-	
+
 	$count_result = $mysqli->query($count_query);
 	
 	while($row = mysqli_fetch_array($count_result, MYSQLI_ASSOC)) {
 		$breed = "\"" . $row["Hbreed"] . "\"";
 		array_push($breed_array, $breed);
 		array_push($count_array, $row["InjuryCount"]);
-		//echo "<br>breed=" . $result_array[0] . "<br>count=" . $row["InjuryCount"] . "<br>";
+	//	echo "<br>breed=" . $breed . "<br>count=" . $row["InjuryCount"] . "<br>";
 	}
 
 	$bad_result = $mysqli->query($bad_query);
@@ -35,7 +38,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Equine Project | TES Report</title>
+<title>Equine Project | Percent Abnormal: Forelimb</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="../../assets/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css" rel="stylesheet">

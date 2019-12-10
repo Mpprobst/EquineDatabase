@@ -19,6 +19,7 @@
 		$path_count = array($row["Pathology"], $row["Counting"], $bone);
 		array_push($path_count_array, $path_count);
 	}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -79,8 +80,8 @@
 					}
 					?>
 					<div class="btn-group">
-						<a href="graphs/injuries_by_breed.php" class="btn btn-primary mr-2">Injuries by Breed</a>
-						<a href="graphs/tes.php" class="btn btn-primary mr-2">TES</a>
+						<a href="graphs/forelimb_breed.php" class="btn btn-primary mr-2">Forelimb Abnormalities</a>
+						<a href="graphs/hindlimb_breed.php" class="btn btn-primary mr-2">Hindlimb Abnormalities</a>
 						<a href="../home.php" class="btn btn-secondary">Home</a>
 					</div>
 				</div>
@@ -88,6 +89,7 @@
 		</div>
 	</div>
 </div>
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script><!-- Plotly.js -->
 <script type="text/javascript">
 
@@ -128,5 +130,6 @@
 	Plotly.newPlot('Chart', data, layout, {showSendToCloud: true});
 
 </script>
+
 </body>
 
