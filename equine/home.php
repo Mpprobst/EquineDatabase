@@ -43,7 +43,7 @@ if(isset($_COOKIE["equine_database"])) {
 		echo "<a class=\"btn btn-primary mb-2\" href=\"SearchUser.php\">Manage a User</a>";
 	}
 	// TODO : remove enclosing "<li>" tags to remove the indicator dot
-	echo "<li><a class=\"btn btn-success mb-2\" href=\"analytics/reporting.php\">Reports &amp; Statistics</a></li>";
+	echo "<a class=\"btn btn-success mb-2\" href=\"analytics/reporting.php\">Reports &amp; Statistics</a>";
 	echo "<a href=\"functions/php/logout.php\" class=\"btn btn-secondary\">Logout</a>";
 	echo "</div>";
 	if($cookie_array[1] == "read-only") {
