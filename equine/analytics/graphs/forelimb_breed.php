@@ -181,7 +181,85 @@
 		name: bones[3],
 		type: 'bar'
 	};
-	var data = [trace0, trace1, trace2, trace3];
+	var trace4 = {
+		x: breeds[4],
+		y: percents[4],
+		name: bones[4],
+		type: 'bar'
+	};
+	var trace5 = {
+		x: breeds[5],
+		y: percents[5],
+		name: bones[5],
+		type: 'bar'
+	};
+	var trace6 = {
+		x: breeds[6],
+		y: percents[6],
+		name: bones[6],
+		type: 'bar'
+	};
+	var trace7 = {
+		x: breeds[7],
+		y: percents[7],
+		name: bones[7],
+		type: 'bar'
+	};
+	var trace8 = {
+		x: breeds[8],
+		y: percents[8],
+		name: bones[8],
+		type: 'bar'
+	};
+	var trace9 = {
+		x: breeds[9],
+		y: percents[9],
+		name: bones[9],
+		type: 'bar'
+	};
+	var trace10 = {
+		x: breeds[10],
+		y: percents[10],
+		name: bones[10],
+		type: 'bar'
+	};
+	var trace11 = {
+		x: breeds[11],
+		y: percents[11],
+		name: bones[11],
+		type: 'bar'
+	};
+	var trace12 = {
+		x: breeds[12],
+		y: percents[12],
+		name: bones[12],
+		type: 'bar'
+	};
+	var trace13 = {
+		x: breeds[13],
+		y: percents[13],
+		name: bones[13],
+		type: 'bar'
+	};
+	var trace14 = {
+		x: breeds[14],
+		y: percents[14],
+		name: bones[14],
+		type: 'bar'
+	};
+	var trace15 = {
+		x: breeds[15],
+		y: percents[15],
+		name: bones[15],
+		type: 'bar'
+	};
+	var trace16 = {
+		x: breeds[16],
+		y: percents[16],
+		name: bones[16],
+		type: 'bar'
+	};
+	var data = [trace0, trace1, trace2, trace3, trace4, trace5, trace6, trace7, trace8, trace9, trace10, trace11, trace12, trace13, trace14, trace15, trace16];
 	var layout = {
 		title: "Percentage of Abnormal Forelimb Pathology Designations by Breed",
 		xaxis: {title: "Breed"},
