@@ -9,7 +9,12 @@
 	if ($mysqli->connect_error) {
 			die("Connection failed: " . $mysqli->connect_error);
 	}
-	$query = "SELECT A.Limb AS Limb, A.Side AS Side, A.Bone AS Bone, A.Pname AS Pathology, COUNT(*) AS Counting FROM (SELECT Limb, Side, Bone, Pname, Cid, Chorse, Pid FROM CasePathology NATURAL JOIN Assessment NATURAL JOIN PathologySite NATURAL JOIN Pathology) AS A INNER JOIN Horse ON A.Chorse = Horse.Hid WHERE Horse.Hbreed = \"arabian\" AND A.Pid > 2 GROUP BY A.Limb, A.Side, A.Bone, A.Pname;";
+	if (isset($_GET["breed"])) {
+		$query = "SELECT A.Limb AS Limb, A.Side AS Side, A.Bone AS Bone, A.Pname AS Pathology, COUNT(*) AS Counting FROM (SELECT Limb, Side, Bone, Pname, Cid, Chorse, Pid FROM CasePathology NATURAL JOIN Assessment NATURAL JOIN PathologySite NATURAL JOIN Pathology) AS A INNER JOIN Horse ON A.Chorse = Horse.Hid WHERE Horse.Hbreed = \"". $_GET["breed"] . "\" AND A.Pid > 2 GROUP BY A.Limb, A.Side, A.Bone, A.Pname;";	
+	} else {
+		$query = "SELECT A.Limb AS Limb, A.Side AS Side, A.Bone AS Bone, A.Pname AS Pathology, COUNT(*) AS Counting FROM (SELECT Limb, Side, Bone, Pname, Cid, Chorse, Pid FROM CasePathology NATURAL JOIN Assessment NATURAL JOIN PathologySite NATURAL JOIN Pathology) AS A INNER JOIN Horse ON A.Chorse = Horse.Hid WHERE A.Pid > 2 GROUP BY A.Limb, A.Side, A.Bone, A.Pname;";
+	}
+	
 	$result = $mysqli->query($query);
 	
 	$path_count_array = array();
@@ -51,7 +56,20 @@
 			<div class="row">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-10">
+					<h3>
+					<?php 
+					if (isset($_GET["breed"])){
+						echo ucwords($_GET["breed"]) . ":";
+					}
+					?> Pathology by bone</h3>
 					<div id="Chart" class="GraphArea"></div>
+					<div class="btn-group" role="group">
+						<a href="reporting.php?breed=arabian" class="btn btn-primary mr-2">Arabian</a>
+						<a href="reporting.php?breed=standardbred" class="btn btn-primary mr-2">Standardbred</a>
+						<a href="reporting.php?breed=thoroughbred" class="btn btn-primary mr-2">Thoroughbred</a>
+						<a href="reporting.php?breed=sprintbred" class="btn btn-primary mr-2">Sprint Horse</a>
+						<a href="reporting.php" class="btn btn-primary">All Breeds</a>
+					</div>
 				</div>
 			</div>
 			<div class="row">
