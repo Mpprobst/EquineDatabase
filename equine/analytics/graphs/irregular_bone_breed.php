@@ -180,8 +180,8 @@ if(isset($_COOKIE["equine_database"])) {
 					}
 					?>
 					<div class="btn-group">
-						<a href="graphs/forelimb_breed.php" class="btn btn-primary mr-2">Forelimb Abnormalities</a>
-						<a href="graphs/hindlimb_breed.php" class="btn btn-primary mr-2">Hindlimb Abnormalities</a>
+						<a href="forelimb_breed.php" class="btn btn-primary mr-2">Forelimb Abnormalities</a>
+						<a href="hindlimb_breed.php" class="btn btn-primary mr-2">Hindlimb Abnormalities</a>
 						<a href="../../home.php" class="btn btn-secondary">Home</a>
 					</div>
 				</div>
