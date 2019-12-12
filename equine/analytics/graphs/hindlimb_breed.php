@@ -108,7 +108,7 @@
         <style>
                 .GraphArea {
                         width: 100%;
-                        height: 20rem;
+                        height: 40rem;
                 }
         </style>
 
@@ -123,8 +123,7 @@ if(isset($_COOKIE["equine_database"])) {
                         <h2>Hindlimb Abnormalities</h2>
                         <!-- Plotly chart will be drawn inside this DIV -->
                         <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                         <div id="Chart" class="GraphArea"></div>
                                         <div class="btn-group">
                                                 <a href="forelimb_breed.php" class="btn btn-primary mr-2">Forelimb Abnormalities</a>
