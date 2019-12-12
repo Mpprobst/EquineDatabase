@@ -274,7 +274,7 @@
 		  bargap: 0.15,
 		  bargroupgap: 0.1
 	};
-        Plotly.newPlot('myDiv', data, layout, {showSendToCloud: true});
+        Plotly.newPlot('Chart', data, layout, {showSendToCloud: true});
         </script>
         </body>
 

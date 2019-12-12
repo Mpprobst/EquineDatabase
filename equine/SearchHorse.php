@@ -21,7 +21,7 @@ if (isset($_COOKIE["equine_database"])) {
 				<h1>Search for a Horse</h1>
 				<form method="post" action="SearchHorse.php">
 					<div class="form-group">
-						<label for="search">Enter a horse's name or Rood & Riddle case ID</label>
+						<label for="search">Enter a horse's name, breed, gender, UK Veterinary ID, or Rood & Riddle case ID</label>
 						<input id="search" class="form-control" name="search" type="text" placeholder="e.g., Secretariat" />		
 					</div>
 					<div class="btn-group" role="group">
@@ -37,7 +37,7 @@ if (isset($_COOKIE["equine_database"])) {
 	if(isset($_POST["search"])) {
 		require("assets/php/mysql_connector.php");
 		$mysqli = mysqli_connect($host, $ROuserName, $ROPass,$DB);
-		$query = "SELECT * FROM Horse WHERE Horse.Hname LIKE \"". $_POST["search"]. "%\" OR Horse.RREH_Cid LIKE \"" . $_POST["search"] . "%\"";
+		$query = "SELECT * FROM Horse WHERE Horse.Hname LIKE \"". $_POST["search"]. "%\" OR Horse.RREH_Cid LIKE \"" . $_POST["search"] . "%\" OR Horse.UK_Cid LIKE \"" . $_POST["search"] . "%\" OR Horse.Hbreed LIKE \"" . $_POST["search"] . "%\" OR Horse.Hgender LIKE \"". $_POST["search"] . "%\"";
 		$result = $mysqli->query($query);
 		if($result->num_rows > 0) {
 			echo "<h2>Search Results for <strong>".$_POST["search"]."</strong>:</h2>";
