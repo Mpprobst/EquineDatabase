@@ -48,6 +48,9 @@
 </head>
 
 <body>
+<?php
+if(isset($_COOKIE["equine_database"])) {
+?>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
@@ -89,9 +92,14 @@
                     $filter = "";
                     $horseTotalQuery = "SELECT COUNT(*) AS HCount FROM Horse;";
                     $summaryQuery = "SELECT Horse.Hbreed AS Hbreed, Horse.Hgender AS Hgender, A.Limb AS Limb, A.Side AS Side, A.Bone AS Bone, A.PhantomDensityIncluded AS Phantom, COUNT(*) AS Counted FROM ( SELECT Limb, Side, Bone, Cid, Chorse, PhantomDensityIncluded FROM CasePathology NATURAL JOIN Assessment NATURAL JOIN PathologySite ) AS A INNER JOIN Horse ON A.Chorse = Horse.Hid GROUP BY Horse.Hbreed, Horse.Hgender, A.Limb, A.Side, A.Bone, A.PhantomDensityIncluded;";
-                    $numSummary = 0;
+                    $numSummary = 1;
                     if (isset($_GET["sBreed"])) {
-                        $filter .= "WHERE Hbreed = \"" . $_GET["sBreed"] . "\"";
+                        if ($numSummary > 0) {
+                            $filter .= " AND ";
+                        } else {
+                            $filter .= "WHERE ";
+                        }
+                        $filter .= "Hbreed = \"" . $_GET["sBreed"] . "\"";
                         $numSummary++;
                     }
                     
@@ -115,8 +123,8 @@
                         $numSummary++;
                     }
 
-                    $summaryQuery = "SELECT Horse.Hbreed AS Hbreed, Horse.Hgender AS Hgender, A.Limb AS Limb, A.Side AS Side, A.Bone AS Bone, A.PhantomDensityIncluded AS Phantom, COUNT(*) AS Counted FROM ( SELECT Limb, Side, Bone, Cid, Chorse, PhantomDensityIncluded FROM CasePathology NATURAL JOIN Assessment NATURAL JOIN PathologySite ) AS A INNER JOIN Horse ON A.Chorse = Horse.Hid ". $filter ." GROUP BY Horse.Hbreed, Horse.Hgender, A.Limb, A.Side, A.Bone, A.PhantomDensityIncluded;";
-                    $horseTotalQuery = "SELECT COUNT(*) AS HCount FROM Horse INNER JOIN Assessment ON Horse.Hid = Assessment.Chorse NATURAL JOIN CasePathology NATURAL JOIN PathologySite " . $filter;
+                    $summaryQuery = "SELECT Horse.Hbreed AS Hbreed, Horse.Hgender AS Hgender, A.Limb AS Limb, A.Side AS Side, A.Bone AS Bone, A.PhantomDensityIncluded AS Phantom, A.Pname AS Pathology, COUNT(*) AS Counted FROM ( SELECT Limb, Side, Bone, Cid, Chorse, PhantomDensityIncluded, Pname, Pid FROM CasePathology NATURAL JOIN Assessment NATURAL JOIN PathologySite NATURAL JOIN Pathology) AS A INNER JOIN Horse ON A.Chorse = Horse.Hid WHERE A.Pid > 2 ". $filter ." GROUP BY Horse.Hbreed, Horse.Hgender, A.Limb, A.Side, A.Bone, A.PhantomDensityIncluded, A.Pname;";
+                    $horseTotalQuery = "SELECT COUNT(*) AS HCount FROM Horse INNER JOIN Assessment ON Horse.Hid = Assessment.Chorse NATURAL JOIN CasePathology NATURAL JOIN PathologySite NATURAL JOIN Pathology WHERE Pid > 2" . $filter;
 					$summary = $mysqli->query($summaryQuery);
 					if ($summary->num_rows >0) {
                         $horseTotal = 1;
@@ -126,7 +134,7 @@
                         }
 						echo "<table class=\"table table-responsive table-hover\">";
 						echo "<thead>";
-						echo "<tr><th>Breed</th><th>Gender</th><th>Limb</th><th>Side</th><th>Bone</th><th>Phantom Density</th><th></th></tr>";
+						echo "<tr><th>Breed</th><th>Gender</th><th>Limb</th><th>Side</th><th>Bone</th><th>Phantom Density</th><th>Irregular Pathology</th><th></th></tr>";
 						echo "</thead><tbody>";
 						while($row = mysqli_fetch_array($summary, MYSQLI_ASSOC)){
                             $params = "?";
@@ -160,12 +168,15 @@
 							echo "<td>". $row["Limb"] ."</td>";
                             echo "<td>".$row["Side"]."</td>";
 							echo "<td><a href=\"irregular_bone_breed.php".$params."sBone=".$row["Bone"] . "\" >".$row["Bone"]."</td>";
-							echo "<td>". ($row["Phantom"]== 0 ? "No" : "Yes")."</td>";
+                            echo "<td>". ($row["Phantom"]== 0 ? "No" : "Yes")."</td>";
+                            echo "<td>". $row["Pathology"] . "</td>";
 							echo "<td>". $row["Counted"] . " [" . round(($row["Counted"] / $horseTotal * 100), 2) ."%]</td>";
 							echo "</tr>";
 						}
 						echo "</tbody></table>";
-
+                        if($filter != ""){
+                            echo "<a href=\"irregular_bone_breed.php\">Clear Filter...</a>"; 
+                        }
 					}
 					?>
 					<div class="btn-group">
@@ -224,6 +235,13 @@
 
 
 </script>
+<?php
+} else {
+	echo "Not Logged In";
+	require("assets/php/request_helper.php");
+	header("Location: http://" . $ip . "/equine/");
+}
 
+?>
 </body>
 

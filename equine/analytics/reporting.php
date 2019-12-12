@@ -33,6 +33,9 @@
 </head>
 
 <body>
+<?php
+if(isset($_COOKIE["equine_database"])) {
+?>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
@@ -108,5 +111,13 @@
 		</div>
 	</div>
 </div>
+<?php
+} else {
+	echo "Not Logged In";
+	require("assets/php/request_helper.php");
+	header("Location: http://" . $ip . "/equine/");
+}
+
+?>
 </body>
 
