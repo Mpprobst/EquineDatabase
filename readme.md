@@ -7,6 +7,9 @@ Produced for CS405G-001 (Final Group Project)
 - Nicholas Poe
 - Jake Hayden
 
+### Database Initialization
+To initialize this database, run /equine/utilities/initialize_database.sh to create the database in mysql. Then, run /equine/utilities/upload.sh to upload all files in the project to the /var/www/html/ directory. Anytime a change is made to the website, the upload.sh script can be used to push those changes to the website. Also, to change the ip address to which the website is hosted, change the ip address in the file: /equine/assets/php/redirect_helper.php  
+
 ### Outside Resourses:
 - Plotly.ly : a JavaScript open source graphing library. We use Plotly to produce graphs displaying pathology data.
 - Bootstrap 4 : an open source toolkit for developing with HTML, CSS, and JS. We use Bootstrap to improve the general asthetic of our website.  
