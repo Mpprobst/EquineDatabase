@@ -35,20 +35,57 @@ if (isset($_COOKIE["equine_database"])) {
 		while ($row = mysqli_fetch_array($assessments, MYSQLI_ASSOC)) {
             echo "<h3>" . $row["Side"] . " " . $row["Limb"] . " Assessment for " . $row["Hname"] . "</h3>";
             $hid = $row["Hid"];
-			echo "<ul class=\"list-group\">";
-            echo "<li class=\"list-group-item\">Rood &amp; Riddle Case Number: <strong>" . $row["RREH_Cid"] . "</strong></li>";
-            echo "<li class=\"list-group-item\">UK Veterinary Diagnostic Case Number: <strong>" . $row["UK_Cid"] . "</strong></li>";
+			echo "<form method=\"post\" action=\"./functions/php/UpdateAssessment.php\">";
+			echo "<input type=\"hidden\" name=\"Cid\" value=\"" . $Cid . "\" />";
+            echo "<div class=\"form-group\"><label for=\"RoodRiddle\">Rood and Riddle Case Number:</label><input type=\"text\" class=\"form-control\" name=\"RREH_CID\" id=\"RoodRiddle\" value=\"". $row["RREH_Cid"]."\" /></div>";
+            echo "<div class=\"form-group\"><label for=\"UKCID\">UK Veterinary Diagnostic Case Number:</label><input type=\"text\" class=\"form-control\" name=\"UKCID\" id=\"UKCID\" value=\"". $row["UK_Cid"]."\" /></div>";
 			echo "<li class=\"list-group-item\">Original Assessing Clinic: <strong>" . $row["Clinic"] . "</strong></li>";
 			echo "<li class=\"list-group-item\">Original Assessor: <strong>" . $row["Name"] . "</strong></li>";
 			echo "<li class=\"list-group-item\">Limb Assessed: <strong>" . $row["Limb"] . "</strong></li>";
-			echo "<li class=\"list-group-item\">Side Assessed: <strong>" . $row["Side"] . "</strong></li>";
+			echo "<div class=\"form-group\"><label for=\"leg\">Side Assessed</label><select class=\"form-control\" id=\"leg\" name=\"SideAssessed\">";
+			$left = "";
+			$right = "";
+			if ($row["Side"] == "Left") {
+				$left = "selected";
+			} else {
+				$right = "selected";
+			}
+			echo "<option value=\"Left\" " . $left . " >Left</option>";
+			echo "<option value=\"Right\" " . $right . " >Right</option>";
+			echo "</select></div>";
             echo "<li class=\"list-group-item\">Date Assessment Entered: <strong>" . $row["Cdate"] . "</strong></li>";
-            $phantom = ($row["Phantom"] == TRUE) ? "Yes" : "No";
-            echo "<li class=\"list-group-item\">Phantom Density Normalization Included?: <strong>" . $phantom . "</strong></li>";
-			echo "</ul>";
+            echo "<div class=\"form-group\"><label for=\"Phantom\">Phantom Density Normalization Included?</label>";
+			$phantom = "";
+			if ($row["Phantom"] == TRUE) {
+				$phantom = "checked";
+			}
+			echo"<input class=\"input-control\" type=\"checkbox\" name=\"Phantom\" id=\"Phantom\" value=\"" . $phantom . "\"/>";
+			echo "</div>";
+			
 		}
-        
-        $pathologiesQuery = "SELECT S.Limb, S.Bone AS Bone, S.Site AS Site, S.SiteB AS SiteB, P.Pname AS Name FROM CasePathology AS C INNER JOIN PathologySite AS S ON S.Sid = C.Sid INNER JOIN Pathology AS P ON P.Pid = C.Pid WHERE CID=" . $Cid;
+		
+
+		function getOptions($sid, $cid, $mysqli) {
+			echo "<select class=\"form-control\" name=\"". $sid . "\" id=\"S" . $sid . "\">";
+			$pathQuery = "SELECT S.Sid AS Sid, P.Pname AS Pname, P.Pid AS Pid FROM Pathology as P INNER JOIN PathologyAtSite as A ON P.Pid = A.Pid INNER JOIN PathologySite as S ON A.Sid = S.Sid where S.Sid=\"" . $sid . "\"";
+			$activeQuery = "SELECT Pid FROM CasePathology WHERE Cid=". $cid . " AND Sid=" . $sid;
+			
+			$pathologies = $mysqli->query($pathQuery);
+			while ($pathology = mysqli_fetch_array($pathologies, MYSQLI_ASSOC)){
+				$selected = "";
+				$selections = $mysqli->query($activeQuery);
+				while ($selection = mysqli_fetch_array($selections, MYSQLI_ASSOC)){
+					echo "Selection: ". $selection["Pid"] . " Pathology: " . $pathology["Pid"];
+					if ($selection["Pid"] === $pathology["Pid"]) {
+						$selected = "selected";
+					}
+				}
+				echo "<option value=\"". $pathology["Pid"]. "\" " . $selected . " >" . $pathology["Pname"] . "</option>";
+			}
+			echo "</select>";
+		}
+		
+        $pathologiesQuery = "SELECT S.Sid AS Sid, S.Limb, S.Bone AS Bone, S.Site AS Site, S.SiteB AS SiteB, P.Pname AS Name FROM CasePathology AS C INNER JOIN PathologySite AS S ON S.Sid = C.Sid INNER JOIN Pathology AS P ON P.Pid = C.Pid WHERE CID=" . $Cid;
         $pathologies = $conn->query($pathologiesQuery);
 
         if ($pathologies->num_rows > 0) {
@@ -79,8 +116,9 @@ if (isset($_COOKIE["equine_database"])) {
                         } 
                         // Open a new bone
                         echo "<li>";
-                        echo  $locationName . ": ";
-                        echo "<strong>" . $name . "</strong>";
+						echo  $locationName . ": ";
+						getOptions($site["Sid"], $Cid, $conn);
+                        echo "Current Value: <strong>" . $name . "</strong>";
                         $boneOpen = true;
                         echo "<ol type=\"a\">";
                     } else {  
@@ -88,8 +126,9 @@ if (isset($_COOKIE["equine_database"])) {
                         $locationName = $bone . " " . $loc;
                         // Open a new Site
                         echo "<li>";
-                        echo  $locationName . ": ";
-                        echo "<strong>" . $name . "</strong>";
+						echo  $locationName . ": ";
+						getOptions($site["Sid"], $Cid, $conn);
+                        echo "Current Value: <strong>" . $name . "</strong>";
                         $siteOpen = true;
                         echo "<ol type=\"i\">";
                     }
@@ -97,8 +136,9 @@ if (isset($_COOKIE["equine_database"])) {
                     $locationName = $bone . " " .$loc. " " . $locb;
                     // Open and close a new siteb
                     echo "<li>";
-                    echo  $locationName . ": ";
-                    echo "<strong>" . $name . "</strong>";
+					echo  $locationName . ": ";
+					getOptions($site["Sid"], $Cid, $conn);
+                    echo "Current Value: <strong>" . $name . "</strong>";
                     echo "</li>";
                 }
             }
@@ -106,15 +146,14 @@ if (isset($_COOKIE["equine_database"])) {
         } else {
             echo "<p><strong>No Pathologies found for this Assessment</strong></p>";
         }
-        
-
+        echo "<div class=\"btn-group\" role=\"group\"><button type=\"submit\" class=\"btn btn-primary  mb-2\" >Submit</button></div>";
+		echo "</form>";
 	} else {
 		echo "<p><strong>No assessments found for this horse.</strong></p>";
 	}
 ?>
         <div class="btn-group" role="group">
-            <a class="btn btn-success mr-2" href="EditAssessment.php?id=<?php echo $Cid; ?>">Edit</a>
-            <a class="btn btn-secondary mr-2" href="ViewHorse.php?id=<?php echo $hid; ?>">Back</a>
+            <a class="btn btn-danger mr-2" href="ViewHorse.php?id=<?php echo $hid; ?>">Back</a>
             <a class="btn btn-secondary" href="home.php">Home</a>
         </div>          
 <?php

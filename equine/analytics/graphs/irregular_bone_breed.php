@@ -175,7 +175,7 @@ if(isset($_COOKIE["equine_database"])) {
 						}
 						echo "</tbody></table>";
                         if($filter != ""){
-                            echo "<a href=\"irregular_bone_breed.php\">Clear Filter...</a>"; 
+                            echo "<a href=\"irregular_bone_breed.php\">Clear Filter...</a><br />"; 
                         }
 					}
 					?>
